@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #000;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+.breadcrumbs a {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.faq-list {
+    margin-top: 20px;
+}
+
+.faq-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #ddd;
+}
+
+.faq-item i {
+    color: #d4ad70; /* Gold color for plus icon */
+    font-size: 18px;
+    font-weight: bold;
+}
