@@ -1,0 +1,24 @@
+﻿@using SignalPlus.Models.Enums
+@model SignalPlus.Models.Signal
+
+<h2>Submit New Signal</h2>
+
+<form asp-action="NewSignal" asp-controller="Signal" method="post">
+   <label for="Title">Заглавие:</label>
+    <input asp-for="Title" class="form-control" required />
+    <span asp-validation-for="Title" class="text-danger"></span>
+
+    <label for="Description">Описание:</label>
+    <textarea asp-for="Description" class="form-control" required></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+
+    <label for="Category">Категория:</label>
+    <select asp-for="Category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control"></select>
+    <span asp-validation-for="Category" class="text-danger"></span>
+
+    <label for="LocationAddress">Адрес:</label>
+    <input asp-for="LocationAddress" class="form-control" required />
+    <span asp-validation-for="LocationAddress" class="text-danger"></span>
+
+    <button type="submit" class="btn btn-primary">Подай сигнал</button>
+</form>
