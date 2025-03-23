@@ -1,0 +1,44 @@
+﻿@model SignalPlus.DTOs.User.MyProfileDto
+
+<h2>Моят Профил</h2>
+
+<div>
+    <p><strong>Име:</strong> @Model.Name</p>
+    <p><strong>Имейл:</strong> @Model.Email</p>
+    <p><strong>Телефон:</strong> @Model.PhoneNumber</p>
+</div>
+
+<hr />
+<h3>Сигнали</h3>
+
+@if (Model.Signals.Count == 0)
+{
+    <p>Нямате подадени сигнали.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Заглавие</th>
+                <th>Категория</th>
+                <th>Статус</th>
+                <th>Дата</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var signal in Model.Signals)
+            {
+                <tr>
+                    <td>@signal.Title</td>
+                    <td>@signal.Category</td>
+                    <td>@signal.Status</td>
+                    <td>@signal.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<hr />
+<h3>Смяна на парола</h3>
