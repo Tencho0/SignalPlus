@@ -4,26 +4,124 @@
     //var passwordModel = ViewBag.ChangePasswordModel as ChangePasswordDTO ?? new ChangePasswordDTO();
 }
 
+<style>
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    .sidebar-box {
+        width: 260px;
+        border: 1px solid #ddd;
+        background-color: white;
+        padding: 15px;
+        box-sizing: border-box;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+        .sidebar-box h4 {
+            color: #b49100;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            margin-left: 5px;
+            text-transform: uppercase;
+        }
+
+    .menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 10px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 4px;
+        position: relative;
+        transition: background 0.2s ease;
+    }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background-color: #fcf9ee;
+        }
+
+        .menu-item .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-item .icon {
+            font-size: 16px;
+            width: 20px;
+            margin-right: 8px;
+            color: #b49100;
+        }
+
+        .menu-item .label {
+            color: #222;
+            white-space: nowrap;
+        }
+
+        .menu-item .badge {
+            background-color: #b49100;
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 50%;
+            margin-left: 8px;
+            font-weight: bold;
+        }
+
+        .menu-item .arrow {
+            font-size: 14px;
+            color: #777;
+        }
+</style>
 <section class="internal-content">
     <div class="container">
         <!-- Header -->
-        <aside class="sidebar">
-            <h3>МОЯТ ПРОФИЛ</h3>
-            <ul>
-                <li class="active">
-                    <span>👤</span> Профил
+        <div class="sidebar-box">
+            <h4>МОЯТ ПРОФИЛ</h4>
+            <ul class="menu">
+                <li class="menu-item active">
+                    <div class="left">
+                        <span class="icon">👤</span>
+                        <span class="label">Профил</span>
+                    </div>
+                    <span class="arrow">›</span>
                 </li>
-                <li>
-                    <span>🔔</span> Сигнали <span class="badge">0</span>
+                <li class="menu-item">
+                    <div class="left">
+                        <span class="icon">🔔</span>
+                        <span class="label">Сигнали</span>
+                        <span class="badge">0</span>
+                    </div>
+                    <span class="arrow">›</span>
                 </li>
-                <li>
-                    <span>🗑️</span> Изтриване на профил
+                <li class="menu-item">
+                    <div class="left">
+                        <span class="icon">🗑️</span>
+                        <span class="label">Изтриване на профил</span>
+                    </div>
+                    <span class="arrow">›</span>
                 </li>
-                <li>
-                    <span>🔓</span> Изход
+                <li class="menu-item">
+                    <div class="left">
+                        <span class="icon">🔓</span>
+                        <span class="label">Изход</span>
+                    </div>
+                    <span class="arrow">›</span>
                 </li>
             </ul>
-        </aside>
+        </div>
 
         <main class="profile">
             <h1>Моите данни</h1>
