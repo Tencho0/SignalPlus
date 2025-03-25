@@ -535,11 +535,13 @@ h1 {
 
 
 
-
+/*
 .container {
     display: flex;
 }
 
+    It broke signals design but is usefull for the myprofile
+*/ 
 .sidebar {
     width: 250px;
     background: #fff;
