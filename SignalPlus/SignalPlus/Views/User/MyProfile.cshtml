@@ -1,44 +1,51 @@
 ﻿@model SignalPlus.DTOs.User.MyProfileDto
-
-<h2>Моят Профил</h2>
-
-<div>
-    <p><strong>Име:</strong> @Model.Name</p>
-    <p><strong>Имейл:</strong> @Model.Email</p>
-    <p><strong>Телефон:</strong> @Model.PhoneNumber</p>
-</div>
-
-<hr />
-<h3>Сигнали</h3>
-
-@if (Model.Signals.Count == 0)
-{
-    <p>Нямате подадени сигнали.</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Заглавие</th>
-                <th>Категория</th>
-                <th>Статус</th>
-                <th>Дата</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var signal in Model.Signals)
-            {
-                <tr>
-                    <td>@signal.Title</td>
-                    <td>@signal.Category</td>
-                    <td>@signal.Status</td>
-                    <td>@signal.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+@{
+    ViewBag.Title = "Моят профил";
+    //var passwordModel = ViewBag.ChangePasswordModel as ChangePasswordDTO ?? new ChangePasswordDTO();
 }
 
-<hr />
-<h3>Смяна на парола</h3>
+<section class="internal-content">
+    <div class="container">
+        <!-- Header -->
+        <aside class="sidebar">
+            <h3>МОЯТ ПРОФИЛ</h3>
+            <ul>
+                <li class="active">
+                    <span>👤</span> Профил
+                </li>
+                <li>
+                    <span>🔔</span> Сигнали <span class="badge">0</span>
+                </li>
+                <li>
+                    <span>🗑️</span> Изтриване на профил
+                </li>
+                <li>
+                    <span>🔓</span> Изход
+                </li>
+            </ul>
+        </aside>
+
+        <main class="profile">
+            <h1>Моите данни</h1>
+            <div class="form-group">
+                <label>Имена</label>
+                <input type="text" value="Simeon Vasilev Hristov" />
+                <label>Телефон</label>
+                <input type="text" value="0897405060" />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" value="ludumoranemabg@gmail.com" disabled />
+            </div>
+
+            <h2>Промяна на парола</h2>
+            <div class="form-group">
+                <label>Нова парола</label>
+                <input type="password" />
+                <label>Повтори парола</label>
+                <input type="password" />
+            </div>
+            <button class="save-btn">ЗАПАЗИ</button>
+        </main>
+    </div>
+</section>
