@@ -84,5 +84,13 @@
 
             return View(profile);
         }
+
+        public async Task<IActionResult> DeleteProfile()
+        {
+            var userId = Guid.Parse("73DCB058-FC94-4C80-9745-1E7C0543EC56");
+            var profile = await _userService.GetUserProfileAsync(userId);
+
+            return View(profile);
+        }
     }
 }
