@@ -12,6 +12,10 @@
         background-color: #f5f5f5;
     }
 
+    a {
+        text-decoration: none;
+    }
+
     .sidebar-box {
         width: 260px;
         border: 1px solid #ddd;
@@ -91,6 +95,8 @@
         <div class="sidebar-box">
             <h4>МОЯТ ПРОФИЛ</h4>
             <ul class="menu">
+
+                <a asp-controller="User" asp-action="MyProfile">
                 <li class="menu-item active">
                     <div class="left">
                         <span class="icon">👤</span>
@@ -98,6 +104,9 @@
                     </div>
                     <span class="arrow">›</span>
                 </li>
+                </a>
+
+                <a asp-controller="User" asp-action="MySignals">
                 <li class="menu-item">
                     <div class="left">
                         <span class="icon">🔔</span>
@@ -106,6 +115,9 @@
                     </div>
                     <span class="arrow">›</span>
                 </li>
+                </a>
+
+                <a asp-controller="User" asp-action="DeleteAccount">
                 <li class="menu-item">
                     <div class="left">
                         <span class="icon">🗑️</span>
@@ -113,6 +125,10 @@
                     </div>
                     <span class="arrow">›</span>
                 </li>
+                </a>
+
+                <form asp-controller="User" asp-action="Logout" method="post" style="margin: 0;">
+                    <button type="submit" style="all: unset; cursor: pointer; width: 100%;">
                 <li class="menu-item">
                     <div class="left">
                         <span class="icon">🔓</span>
@@ -120,8 +136,12 @@
                     </div>
                     <span class="arrow">›</span>
                 </li>
+                </button>
+                </form>
+
             </ul>
         </div>
+
 
         <main class="profile">
             <h1>Моите данни</h1>

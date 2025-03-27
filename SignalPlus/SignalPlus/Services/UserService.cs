@@ -1,5 +1,6 @@
 ﻿namespace SignalPlus.Services
 {
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using SignalPlus.Data;
     using SignalPlus.DTOs.User;
@@ -9,18 +10,22 @@
     public class UserService : IUserService
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserService(ApplicationDbContext context)
+        public UserService(ApplicationDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
-        public async Task<User?> AuthenticateAsync(string email, string password)
+        public async Task<User?> LoginUserAsync(string email, string password)
         {
-            var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Email == email);
+            var user = _context.Users.FirstOrDefault(u => u.UserName.ToLower() == email.ToLower());
 
-            if (user == null || user.PasswordHash != password) // TODO: use hashed passwords
+            bool isValid = await _userManager.CheckPasswordAsync(user, password);
+            if (user == null || !isValid)
             {
                 return null;
             }
@@ -35,20 +40,26 @@
 
             var user = new User
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.NewGuid().ToString(),
+                UserName = register.Email,
                 Name = register.Name,
                 Email = register.Email,
+                NormalizedEmail = register.Email.ToUpper(),
                 PhoneNumber = register.PhoneNumber,
-                PasswordHash = register.Password // TODO: hash
             };
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return true;
+            try
+            {
+                var result = await _userManager.CreateAsync(user, register.Password);
+                return result.Succeeded;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
-        public async Task<MyProfileDto?> GetUserProfileAsync(Guid userId)
+        public async Task<MyProfileDto?> GetUserProfileAsync(string userId)
         {
             var user = await _context.Users
                 .Include(u => u.Signals)

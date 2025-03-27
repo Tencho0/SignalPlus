@@ -5,4 +5,27 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Authenticated: @User.Identity.IsAuthenticated</p>
+
+    <ul>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <li>
+                <a asp-controller="User" asp-action="Login">Login</a>
+            </li>
+            <li>
+                <a asp-controller="User" asp-action="Register">Register</a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="#">Hello, @User.Identity.Name</a>
+            </li>
+
+            <li>
+                <a asp-controller="User" asp-action="Logout">Logout</a>
+            </li>
+        }
+    </ul>
 </div>

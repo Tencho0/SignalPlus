@@ -1,12 +1,10 @@
 ﻿namespace SignalPlus.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Identity;
 
-    public class User
+    public class User : IdentityUser
     {
-        [Key]
-        public Guid Id { get; set; }
-
         [Required]
         public string Name { get; set; }
 
@@ -16,9 +14,6 @@
 
         [Phone]
         public string PhoneNumber { get; set; }
-
-        // Optional for non-registered users
-        public string? PasswordHash { get; set; }
 
         // Navigation property - list of signals submitted by the user
         public ICollection<Signal> Signals { get; set; }
