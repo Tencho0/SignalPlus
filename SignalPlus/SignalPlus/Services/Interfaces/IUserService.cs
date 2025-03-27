@@ -5,10 +5,10 @@
 
     public interface IUserService
     {
-        Task<User?> AuthenticateAsync(string email, string password);
+        Task<User?> LoginUserAsync(string email, string password);
 
         Task<bool> RegisterUserAsync(RegisterDTO register);
         
-        Task<MyProfileDto?> GetUserProfileAsync(Guid userId);
+        Task<MyProfileDto?> GetUserProfileAsync(string userId);
     }
 }

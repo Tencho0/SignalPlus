@@ -536,10 +536,10 @@ h1 {
 
 
 
-.container {
+/*.container {
     display: flex;
 }
-
+*/
 .sidebar {
     width: 250px;
     background: #fff;
