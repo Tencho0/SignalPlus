@@ -8,7 +8,7 @@
         Task<User?> LoginUserAsync(string email, string password);
 
         Task<bool> RegisterUserAsync(RegisterDTO register);
-        
-        Task<MyProfileDto?> GetUserProfileAsync(string userId);
+
+        Task<MyProfileDto?> GetCurrentUserProfileAsync();
     }
 }

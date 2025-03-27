@@ -12,12 +12,14 @@
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserService(ApplicationDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public UserService(ApplicationDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<User?> LoginUserAsync(string email, string password)
@@ -59,13 +61,14 @@
             }
         }
 
-        public async Task<MyProfileDto?> GetUserProfileAsync(string userId)
+        public async Task<MyProfileDto?> GetCurrentUserProfileAsync()
         {
-            var user = await _context.Users
-                .Include(u => u.Signals)
-                .FirstOrDefaultAsync(u => u.Id == userId);
+            var userContext = _httpContextAccessor.HttpContext?.User;
 
-            if (user == null) return null;
+            if (userContext == null || !userContext.Identity.IsAuthenticated)
+                return null;
+
+            var user = await _userManager.GetUserAsync(userContext);
 
             return new MyProfileDto
             {
@@ -73,10 +76,13 @@
                 Name = user.Name,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
-                PasswordHash = user.PasswordHash,
-                Signals = user.Signals.ToList()
             };
         }
 
+        //public string? GetCurrentUserId()
+        //{
+        //    var user = _httpContextAccessor.HttpContext?.User;
+        //    return _userManager.GetUserId(user); // returns string or null
+        //}
     }
 }

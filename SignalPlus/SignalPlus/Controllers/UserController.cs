@@ -68,8 +68,8 @@
             return RedirectToAction("Login");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
@@ -80,12 +80,7 @@
 
         public async Task<IActionResult> MyProfile()
         {
-            //var userIdStr = HttpContext.Session.GetString("UserId");
-            //if (string.IsNullOrEmpty(userIdStr)) return RedirectToAction("Login");
-
-            //var userId = Guid.Parse(userIdStr);
-            var userId = Guid.Parse("73DCB058-FC94-4C80-9745-1E7C0543EC56").ToString();
-            var profile = await _userService.GetUserProfileAsync(userId);
+            var profile = await _userService.GetCurrentUserProfileAsync();
 
             if (profile == null) return RedirectToAction("Login");
 
@@ -95,32 +90,21 @@
         public async Task<IActionResult> DeleteProfile()
         {
             var userId = Guid.Parse("73DCB058-FC94-4C80-9745-1E7C0543EC56").ToString();
-            var profile = await _userService.GetUserProfileAsync(userId);
+            var profile = await _userService.GetCurrentUserProfileAsync();
 
             return View(profile);
         }
 
         private async Task SignInUser(User model)
         {
-            var handler = new JwtSecurityTokenHandler();
-            // var jwt = handler.ReadJwtToken(model.Token);
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, model.Id),
+                new Claim(ClaimTypes.Name, model.UserName ?? model.Email),
+                new Claim(ClaimTypes.Email, model.Email),
+            };
 
-            var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-
-            //identity
-            //    .AddClaim(new Claim(JwtRegisteredClaimNames.Email, jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Email).Value));
-
-            //identity
-            //    .AddClaim(new Claim(JwtRegisteredClaimNames.Sub, jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Sub).Value));
-
-            //identity
-            //    .AddClaim(new Claim(JwtRegisteredClaimNames.Name, jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Name).Value));
-
-            //identity
-            //    .AddClaim(new Claim(ClaimTypes.Name, jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Email).Value));
-
-            //identity
-            //    .AddClaim(new Claim(ClaimTypes.Role, jwt.Claims.FirstOrDefault(u => u.Type == "role").Value));
+            var identity = new ClaimsIdentity(claims, IdentityConstants.ApplicationScheme);
 
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, principal);

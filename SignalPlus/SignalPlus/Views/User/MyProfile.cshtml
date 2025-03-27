@@ -117,7 +117,7 @@
                 </li>
                 </a>
 
-                <a asp-controller="User" asp-action="DeleteAccount">
+                <a asp-controller="User" asp-action="DeleteProfile">
                 <li class="menu-item">
                     <div class="left">
                         <span class="icon">🗑️</span>
@@ -142,14 +142,13 @@
             </ul>
         </div>
 
-
         <main class="profile">
             <h1>Моите данни</h1>
             <div class="form-group">
                 <label>Имена</label>
-                <input type="text" value="Simeon Vasilev Hristov" />
+                <input asp-for="Name" class="form-control" />
                 <label>Телефон</label>
-                <input type="text" value="0897405060" />
+                <input asp-for="PhoneNumber" class="form-control" />
             </div>
             <div class="form-group">
                 <label>Email</label>
