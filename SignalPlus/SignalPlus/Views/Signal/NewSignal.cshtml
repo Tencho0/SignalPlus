@@ -1,24 +1,118 @@
-﻿@using SignalPlus.Models.Enums
-@model SignalPlus.Models.Signal
+﻿<style>
+    .signal-form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        font-family: sans-serif;
+    }
 
-<h2>Submit New Signal</h2>
+        .signal-form h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
 
-<form asp-action="NewSignal" asp-controller="Signal" method="post">
-   <label for="Title">Заглавие:</label>
-    <input asp-for="Title" class="form-control" required />
-    <span asp-validation-for="Title" class="text-danger"></span>
+        .signal-form label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
 
-    <label for="Description">Описание:</label>
-    <textarea asp-for="Description" class="form-control" required></textarea>
-    <span asp-validation-for="Description" class="text-danger"></span>
+        .signal-form input,
+        .signal-form textarea,
+        .signal-form select {
+            width: 100%;
+            padding: 0.6rem;
+            margin-top: 0.3rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
 
-    <label for="Category">Категория:</label>
-    <select asp-for="Category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control"></select>
-    <span asp-validation-for="Category" class="text-danger"></span>
+            .signal-form input[type="file"] {
+                padding: 0.3rem;
+            }
 
-    <label for="LocationAddress">Адрес:</label>
-    <input asp-for="LocationAddress" class="form-control" required />
-    <span asp-validation-for="LocationAddress" class="text-danger"></span>
+        .signal-form .checkbox {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
 
-    <button type="submit" class="btn btn-primary">Подай сигнал</button>
+            .signal-form .checkbox input {
+                width: auto;
+                margin-right: 0.5rem;
+            }
+
+        .signal-form button {
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+            .signal-form button:hover {
+                background-color: #45a049;
+            }
+</style>
+<form asp-action="SubmitSignal" asp-controller="Signal" method="post" enctype="multipart/form-data" class="signal-form">
+    <h2>Подай сигнал</h2>
+
+    <label>1. Адрес или локация от картата:</label>
+    <input type="text" name="Address" placeholder="Въведете адрес" class="form-control" />
+
+    <label>2. Категория:</label>
+    <select name="Category">
+        @foreach (SignalPlus.Models.Enums.Category cat in Enum.GetValues(typeof(SignalPlus.Models.Enums.Category)))
+        {
+            <option value="@cat">@cat</option>
+        }
+    </select>
+
+    <label>3. Заглавие на сигнала:</label>
+    <input type="text" name="Title" placeholder="Кратко заглавие" />
+
+    <label>4. Описание на сигнала:</label>
+    <textarea name="Description" rows="4" placeholder="Опишете проблема подробно"></textarea>
+
+    <label>5. Качете снимки:</label>
+    <input type="file" name="Photos" multiple />
+
+    <label>6. Име на подател:</label>
+    <input type="text" name="SenderName" placeholder="Вашето име" />
+
+    <label>7. Телефон на подател:</label>
+    <input type="tel" name="SenderPhone" placeholder="08XXXXXXXX" />
+
+    <label>8. Имейл на подател:</label>
+    <input type="email" name="SenderEmail" placeholder="email@example.com" />
+
+    <p style="margin-top: 1rem; font-size: 0.95rem; color: #555;">
+        Искаме вашето име, телефон и e-mail, за да се свържем с Вас при обработка на подадения от Вас сигнал.<br />
+        Вашите данни ще бъдат използвани единствено с цел обработка на подадения от вас сигнал.<br />
+        Моля, прочетете внимателно текста на <a href="/privacy" target="_blank">"Информация за обработване на лични данни"</a>.
+    </p>
+
+    <div class="checkbox">
+        <input type="checkbox" name="IsOver14" id="over14" required />
+        <label for="over14">Имам навършени 14 години *</label>
+    </div>
+
+    <div class="checkbox">
+        <input type="checkbox" name="AcceptsPrivacy" id="acceptPrivacy" required />
+        <label for="acceptPrivacy">Съгласен съм с условията за обработване на личните данни *</label>
+    </div>
+
+    <div class="checkbox">
+        <input type="checkbox" name="IsNameVisible" id="consent" />
+        <label for="consent">Съгласен/на съм името ми да бъде видимо при публикуването на сигнала</label>
+    </div>
+
+    <button type="submit">Изпрати сигнал</button>
 </form>
