@@ -7,7 +7,6 @@
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p>Authenticated: @User.Identity.IsAuthenticated</p>
 
-
     <ul>
         @if (!User.Identity.IsAuthenticated)
         {
@@ -15,7 +14,7 @@
                 <a asp-controller="User" asp-action="Login">Login</a>
             </li>
             <li>
-                <a asp-controller="Auth" asp-action="Register">Register</a>
+                <a asp-controller="User" asp-action="Register">Register</a>
             </li>
         }
         else
@@ -25,7 +24,7 @@
             </li>
 
             <li>
-                <a asp-controller="Auth" asp-action="Logout">Logout</a>
+                <a asp-controller="User" asp-action="Logout">Logout</a>
             </li>
         }
     </ul>

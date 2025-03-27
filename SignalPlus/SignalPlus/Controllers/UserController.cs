@@ -30,7 +30,7 @@
         // POST: /User/Login
         [HttpPost]
         public async Task<IActionResult> Login(LoginDTO login)
-            {
+        {
             if (!ModelState.IsValid) return View(login);
 
             var user = await _userService.LoginUserAsync(login.Email, login.Password);
@@ -68,9 +68,13 @@
             return RedirectToAction("Login");
         }
 
-        public IActionResult Logout()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
         {
-            HttpContext.Session.Clear();
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+            // _tokenProvider.ClearToken();
+
             return RedirectToAction("Index", "Home");
         }
 
