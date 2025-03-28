@@ -2,6 +2,7 @@
 {
     using SignalPlus.Models.Enums;
     using SignalPlus.Models;
+    using SignalPlus.DTOs.Signal;
 
     public interface ISignalService
     {
@@ -16,8 +17,8 @@
         Task<int> GetTotalSignalsCountAsync();
         
         Task<int> GetCompletedSignalsCountAsync();
-        
-        Task AddSignalAsync(Signal signal);
+
+        Task<Signal> CreateSignalAsync(User user, NewSignalDTO model);
     }
 
 }

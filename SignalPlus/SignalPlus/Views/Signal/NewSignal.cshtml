@@ -1,4 +1,6 @@
-﻿<style>
+﻿@model SignalPlus.DTOs.Signal.NewSignalDTO
+
+<style>
     .signal-form {
         max-width: 600px;
         margin: 0 auto;
@@ -61,37 +63,46 @@
                 background-color: #45a049;
             }
 </style>
-<form asp-action="SubmitSignal" asp-controller="Signal" method="post" enctype="multipart/form-data" class="signal-form">
+<form asp-action="NewSignal" asp-controller="Signal" method="post" enctype="multipart/form-data" class="signal-form">
     <h2>Подай сигнал</h2>
 
     <label>1. Адрес или локация от картата:</label>
-    <input type="text" name="Address" placeholder="Въведете адрес" class="form-control" />
+    <input asp-for="Address" class="form-control" placeholder="Въведете адрес" />
+    <span asp-validation-for="Address" class="text-danger"></span>
 
     <label>2. Категория:</label>
-    <select name="Category">
-        @foreach (SignalPlus.Models.Enums.Category cat in Enum.GetValues(typeof(SignalPlus.Models.Enums.Category)))
+    <select asp-for="Category" class="form-control">
+        <option disabled selected value="">-- Изберете категория --</option>
+        @foreach (var cat in Enum.GetValues(typeof(SignalPlus.Models.Enums.Category)))
         {
             <option value="@cat">@cat</option>
         }
     </select>
+    <span asp-validation-for="Category" class="text-danger"></span>
 
     <label>3. Заглавие на сигнала:</label>
-    <input type="text" name="Title" placeholder="Кратко заглавие" />
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
 
     <label>4. Описание на сигнала:</label>
-    <textarea name="Description" rows="4" placeholder="Опишете проблема подробно"></textarea>
+    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
 
-    <label>5. Качете снимки:</label>
-    <input type="file" name="Photos" multiple />
+  @*   <label>5. Качете снимки:</label>
+    <input asp-for="Photos" type="file" multiple class="form-control" />
+    <span asp-validation-for="Photos" class="text-danger"></span> *@
 
     <label>6. Име на подател:</label>
-    <input type="text" name="SenderName" placeholder="Вашето име" />
+    <input asp-for="SenderName" class="form-control" />
+    <span asp-validation-for="SenderName" class="text-danger"></span>
 
     <label>7. Телефон на подател:</label>
-    <input type="tel" name="SenderPhone" placeholder="08XXXXXXXX" />
+    <input asp-for="SenderPhone" class="form-control" />
+    <span asp-validation-for="SenderPhone" class="text-danger"></span>
 
     <label>8. Имейл на подател:</label>
-    <input type="email" name="SenderEmail" placeholder="email@example.com" />
+    <input asp-for="SenderEmail" class="form-control" />
+    <span asp-validation-for="SenderEmail" class="text-danger"></span>
 
     <p style="margin-top: 1rem; font-size: 0.95rem; color: #555;">
         Искаме вашето име, телефон и e-mail, за да се свържем с Вас при обработка на подадения от Вас сигнал.<br />
@@ -100,18 +111,20 @@
     </p>
 
     <div class="checkbox">
-        <input type="checkbox" name="IsOver14" id="over14" required />
-        <label for="over14">Имам навършени 14 години *</label>
+        <input asp-for="IsOver14" class="form-check-input" type="checkbox" required />
+        <label asp-for="IsOver14" class="form-check-label">Имам навършени 14 години *</label>
+        <span asp-validation-for="IsOver14" class="text-danger"></span>
     </div>
 
     <div class="checkbox">
-        <input type="checkbox" name="AcceptsPrivacy" id="acceptPrivacy" required />
-        <label for="acceptPrivacy">Съгласен съм с условията за обработване на личните данни *</label>
+        <input asp-for="AcceptsPrivacy" class="form-check-input" type="checkbox" required />
+        <label asp-for="AcceptsPrivacy" class="form-check-label">Съгласен съм с условията за обработване на личните данни *</label>
+        <span asp-validation-for="AcceptsPrivacy" class="text-danger"></span>
     </div>
 
     <div class="checkbox">
-        <input type="checkbox" name="IsNameVisible" id="consent" />
-        <label for="consent">Съгласен/на съм името ми да бъде видимо при публикуването на сигнала</label>
+        <input asp-for="IsNameVisible" class="form-check-input" type="checkbox" />
+        <label asp-for="IsNameVisible" class="form-check-label">Съгласен/на съм името ми да бъде видимо при публикуването на сигнала</label>
     </div>
 
     <button type="submit">Изпрати сигнал</button>

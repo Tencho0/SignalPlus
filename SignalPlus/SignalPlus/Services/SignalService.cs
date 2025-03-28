@@ -5,6 +5,7 @@
     using SignalPlus.Models;
     using SignalPlus.Services.Interfaces;
     using Microsoft.EntityFrameworkCore;
+    using SignalPlus.DTOs.Signal;
 
     public class SignalService : ISignalService
     {
@@ -51,11 +52,30 @@
             return await _context.Signals.CountAsync(s => s.Status == Status.Приключен);
         }
 
-        // Add a new signal
-        public async Task AddSignalAsync(Signal signal)
+        public async Task<Signal> CreateSignalAsync(User user, NewSignalDTO model)
         {
+            var signal = new Signal
+            {
+                Title = model.Title,
+                Description = model.Description,
+                Category = model.Category,
+                Status = Status.Регистриран,
+                CreatedAt = DateTime.UtcNow,
+                LocationAddress = model.Address,
+                Latitude = 0, // TODO: Add from map or geolocation if available
+                Longitude = 0, // TODO: Same as above
+                UserId = user.Id,
+                User = user
+            };
+
             _context.Signals.Add(signal);
+
+            // Optional: Handle image upload here later if you store images
+            // Optional: Generate tracking number and assign it to signal
+
             await _context.SaveChangesAsync();
+
+            return signal;
         }
     }
 

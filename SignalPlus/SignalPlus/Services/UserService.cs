@@ -1,8 +1,10 @@
 ﻿namespace SignalPlus.Services
 {
+    using System.Security.Claims;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using SignalPlus.Data;
+    using SignalPlus.DTOs.Signal;
     using SignalPlus.DTOs.User;
     using SignalPlus.Models;
     using SignalPlus.Services.Interfaces;
@@ -78,6 +80,34 @@
                 PhoneNumber = user.PhoneNumber,
             };
         }
+
+        public async Task<User?> GetCurrentUserAsync(ClaimsPrincipal principal)
+        {
+            if (principal.Identity != null && principal.Identity.IsAuthenticated)
+            {
+                var userIdStr = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (!string.IsNullOrEmpty(userIdStr) && Guid.TryParse(userIdStr, out Guid userId))
+                {
+                    return await _context.Users.FindAsync(userId);
+                }
+            }
+            return null;
+        }
+
+        public async Task<User> CreateAnonymousUser(NewSignalDTO model)
+        {
+            var anonUser = new User
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = model.SenderName,
+                Email = model.SenderEmail,
+                PhoneNumber = model.SenderPhone
+            };
+
+            await _context.Users.AddAsync(anonUser);
+            return anonUser;
+        }
+
 
         //public string? GetCurrentUserId()
         //{

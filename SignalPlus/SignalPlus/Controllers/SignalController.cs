@@ -1,17 +1,22 @@
 ﻿namespace SignalPlus.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using SignalPlus.DTOs.Signal;
     using SignalPlus.Models;
     using SignalPlus.Models.Enums;
+    using SignalPlus.Services;
     using SignalPlus.Services.Interfaces;
 
     public class SignalController : Controller
     {
         private readonly ISignalService _signalService;
+        private readonly IUserService _userService;
 
-        public SignalController(ISignalService signalService)
+        public SignalController(ISignalService signalService, IUserService userService)
         {
             _signalService = signalService;
+            _userService = userService;
         }
 
         // Show all signals
@@ -41,22 +46,34 @@
 
         // Show form to submit a new signal
 
-        [Route("/newSignal")]
+        [HttpGet("/newSignal")]
         public IActionResult NewSignal()
         {
             return View();
         }
 
         //// Handle signal submission
-        [HttpPost]
-        public async Task<IActionResult> NewSignal(Signal signal)
+        [HttpPost("/newSignal")]
+        public async Task<IActionResult> NewSignal(NewSignalDTO model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                await _signalService.AddSignalAsync(signal);
-                return RedirectToAction("AllSignals");
+                return View(model);
             }
-            return RedirectToAction("Index");
+
+            User? user = await _userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+            {
+                user = await _userService.CreateAnonymousUser(model);
+            }
+
+            await _signalService.CreateSignalAsync(user, model);
+
+            return RedirectToAction("AllSignals");
+            // TODO: Send email confirmation with tracking number
+            // TODO: Save uploaded images, if any
         }
+
     }
 }
