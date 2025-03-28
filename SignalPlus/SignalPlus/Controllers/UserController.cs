@@ -96,7 +96,7 @@
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var userSignals = await _signalService.GetSignalsByUserIdAsync(userId);
-            return View(userSignals); // List<MySignalViewModel>
+            return View(userSignals);
         }
 
         public async Task<IActionResult> DeleteProfile()
@@ -120,5 +120,44 @@
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, principal);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfile(MyProfileDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("MyProfile", model);
+            }
+
+            var user = await _userService.GetCurrentUserAsync(User);
+            if (user == null) return Unauthorized();
+
+            user.Name = model.Name;
+            user.PhoneNumber = model.PhoneNumber;
+
+            await _userService.UpdateUserAsync(user);
+
+            if (!string.IsNullOrEmpty(model.NewPassword) || !string.IsNullOrEmpty(model.ConfirmPassword))
+            {
+                if (model.NewPassword != model.ConfirmPassword)
+                {
+                    ModelState.AddModelError("ConfirmPassword", "Паролите не съвпадат.");
+                    return View("MyProfile", model);
+                }
+
+                var result = await _userService.ChangePasswordAsync(user, model.NewPassword);
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                        ModelState.AddModelError(string.Empty, error.Description);
+
+                    return View("MyProfile", model);
+                }
+            }
+
+            TempData["Success"] = "Профилът е обновен успешно!";
+            return RedirectToAction("MyProfile");
+        }
+
     }
 }

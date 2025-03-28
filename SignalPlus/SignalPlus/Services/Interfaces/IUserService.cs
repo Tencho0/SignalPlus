@@ -1,6 +1,7 @@
 ﻿namespace SignalPlus.Services.Interfaces
 {
     using System.Security.Claims;
+    using Microsoft.AspNetCore.Identity;
     using SignalPlus.DTOs.Signal;
     using SignalPlus.DTOs.User;
     using SignalPlus.Models;
@@ -16,5 +17,9 @@
         Task<User?> GetCurrentUserAsync(ClaimsPrincipal principal);
 
         Task<User> CreateAnonymousUser(NewSignalDTO model);
+
+        Task UpdateUserAsync(User user);
+
+        Task<IdentityResult> ChangePasswordAsync(User user, string newPassword);
     }
 }
