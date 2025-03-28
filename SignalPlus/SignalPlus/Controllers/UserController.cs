@@ -11,14 +11,18 @@
     using SignalPlus.Models.Enums;
     using SignalPlus.Services.Interfaces;
     using Microsoft.AspNetCore.Identity;
+    using SignalPlus.Services;
+    using Microsoft.AspNetCore.Authorization;
 
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+        private readonly ISignalService _signalService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, ISignalService signalService)
         {
             _userService = userService;
+            _signalService = signalService;
         }
 
         // GET: /User/Login
@@ -85,6 +89,14 @@
             if (profile == null) return RedirectToAction("Login");
 
             return View(profile);
+        }
+
+        //TODO: [Authenticcated] -> if user is not logger he is anon user with random Id!
+        public async Task<IActionResult> MySignals()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userSignals = await _signalService.GetSignalsByUserIdAsync(userId);
+            return View(userSignals); // List<MySignalViewModel>
         }
 
         public async Task<IActionResult> DeleteProfile()

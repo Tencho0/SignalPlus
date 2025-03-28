@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Signal>
+
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Търсене на сигнал</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="breadcrumbs">
+            <a href="@Url.Action("Index", "Home")">НАЧАЛО</a> / <a href="#">МОИТЕ СИГНАЛИ</a>
+        </div>
+
+        <h1>МОИТЕ СИГНАЛИ</h1>
+
+        <!-- Cards -->
+        <div class="cards">
+            @if (Model.Any())
+            {
+                @foreach (var signal in Model)
+                {
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-bus"></i> @signal.Title
+                        </div>
+                        <div class="card-content">
+                            <p>
+                                <span class="badge">#@signal.Id</span>
+                                <span class="status-@(signal.Status == SignalPlus.Models.Enums.Status.Регистриран ? "registered" : "completed")">
+                                    @signal.Status
+                                </span>
+                            </p>
+                            <p><i class="fa-solid fa-location-dot"></i> @signal.LocationAddress</p>
+                            <p><i class="fa-solid fa-circle-info"></i> @signal.Category</p>
+                            <p><i class="fa-regular fa-calendar"></i> @signal.CreatedAt.ToString("dd MMMM yyyy г., HH:mm ч.")</p>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Няма налични сигнали.</p>
+            }
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="arrow">&larr;</button>
+            <button class="active">1</button>
+            <button class="arrow">&rarr;</button>
+        </div>
+    </div>
+</body>
+</html>
