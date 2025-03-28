@@ -17,17 +17,21 @@
             </div>
 
             <!-- Menu -->
-            <div class="menu">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="menu" id="navbarMenu">
                 <a href="/">НАЧАЛО</a>
                 <a href="/allsignals">СИГНАЛИ</a>
                 <a href="/about">ЗА СИГНАЛ+</a>
                 <a href="/faq">ЧЗВ</a>
                 <a href="/contact">КОНТАКТИ</a>
-
                 @if (!User.Identity.IsAuthenticated)
                 {
                     <a href="/user/login">ВХОД/РЕГИСТРАЦИЯ</a>
-
                 }
                 else
                 {
@@ -73,5 +77,26 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const hamburger = document.getElementById("hamburger");
+            const menu = document.getElementById("navbarMenu");
+
+            if (!hamburger) {
+                console.error("Hamburger not found!");
+                return;
+            }
+
+            if (!menu) {
+                console.error("Menu not found!");
+                return;
+            }
+
+            hamburger.addEventListener("click", function () {
+                menu.classList.toggle("active");
+            });
+        });
+    </script>
+
 </body>
 </html>

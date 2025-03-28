@@ -710,3 +710,92 @@ input[disabled] {
     .submit-signal-btn svg {
         stroke: black;
     }
+
+
+
+
+
+
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+    .hamburger span {
+        width: 25px;
+        height: 3px;
+        background-color: #000;
+        display: block;
+        transition: 0.3s;
+    }
+
+/* Responsive menu */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+        background-color: #fff;
+        padding: 10px 0;
+        z-index: 1000;
+    }
+
+        .menu.active {
+            display: flex;
+        }
+
+        .menu a {
+            padding: 12px 16px;
+            border-top: 1px solid #eee;
+            font-weight: bold;
+        }
+
+    .navbar .button {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+}
+
+
+
+
+
+
+/* MOBILE NAV MENU */
+@media (max-width: 768px) {
+    .menu {
+        display: none !important;
+        flex-direction: column;
+        width: 100%;
+        background-color: #fff;
+        padding: 10px 0;
+    }
+
+        .menu.active {
+            display: flex !important;
+        }
+
+        .menu a {
+            padding: 12px 16px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #000;
+            border-top: 1px solid #eee;
+        }
+}
