@@ -9,7 +9,9 @@
         Task<IEnumerable<Signal>> GetAllSignalsAsync();
         
         Task<IEnumerable<Signal>> GetSignalsByStatusAsync(Status status);
-        
+
+        Task<IEnumerable<Signal>> GetSignalsByUserIdAsync(string userId);
+
         Task<IEnumerable<Signal>> GetSignalsByCategoryAsync(Category category);
         
         Task<IEnumerable<Signal>> GetLastThreeSignalsAsync();

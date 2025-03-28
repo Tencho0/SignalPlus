@@ -28,6 +28,12 @@
             return await _context.Signals.Where(s => s.Status == status).ToListAsync();
         }
 
+        // Get signals by userId
+        public async Task<IEnumerable<Signal>> GetSignalsByUserIdAsync(string userId)
+        {
+            return await _context.Signals.Where(s => s.UserId == userId).OrderByDescending(s => s.CreatedAt).ToListAsync();
+        }
+
         // Get signals by category
         public async Task<IEnumerable<Signal>> GetSignalsByCategoryAsync(Category category)
         {
@@ -67,7 +73,7 @@
                 UserId = user.Id,
                 User = user
             };
-
+            user.Signals.Add(signal);
             _context.Signals.Add(signal);
 
             // Optional: Handle image upload here later if you store images

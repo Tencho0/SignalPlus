@@ -70,7 +70,10 @@
             if (userContext == null || !userContext.Identity.IsAuthenticated)
                 return null;
 
-            var user = await _userManager.GetUserAsync(userContext);
+            var userId = _userManager.GetUserId(userContext);
+            var user = await _userManager.Users
+                .Include(u => u.Signals)
+                .FirstOrDefaultAsync(u => u.Id == userId);
 
             return new MyProfileDto
             {
@@ -78,6 +81,7 @@
                 Name = user.Name,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
+                MySignalsCount = user.Signals.Count
             };
         }
 
@@ -86,9 +90,9 @@
             if (principal.Identity != null && principal.Identity.IsAuthenticated)
             {
                 var userIdStr = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (!string.IsNullOrEmpty(userIdStr) && Guid.TryParse(userIdStr, out Guid userId))
+                if (!string.IsNullOrEmpty(userIdStr))
                 {
-                    return await _context.Users.FindAsync(userId);
+                    return await _context.Users.FindAsync(userIdStr);
                 }
             }
             return null;

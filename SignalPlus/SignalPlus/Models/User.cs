@@ -16,7 +16,7 @@
         public string PhoneNumber { get; set; }
 
         // Navigation property - list of signals submitted by the user
-        public ICollection<Signal> Signals { get; set; }
+        public ICollection<Signal> Signals { get; set; } = new List<Signal>();
     }
 
 }
