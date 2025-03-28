@@ -10,6 +10,30 @@
         {
             context.Database.Migrate();
 
+            if (!context.Users.Any())
+            {
+                var user1 = new User
+                {
+                    Id = "eceed62a-8a49-422d-9417-0a7008ea95ff",
+                    UserName = "ivan.popov@example.com",
+                    Email = "ivan.popov@example.com",
+                    Name = "Иван Попов",
+                    PhoneNumber = "+359888123456"
+                };
+
+                var user2 = new User
+                {
+                    Id = "b11f4443-0e58-4bc1-8c91-0d18e12b7f02",
+                    UserName = "maria.georgieva@example.com",
+                    Email = "maria.georgieva@example.com",
+                    Name = "Мария Георгиева",
+                    PhoneNumber = "+359887987654"
+                };
+
+                context.Users.AddRange(user1, user2);
+                context.SaveChanges();
+            }
+
             if (!context.Signals.Any())
             {
                 // Create sample signals
@@ -62,7 +86,7 @@
                     Latitude = 42.6901M,
                     Longitude = 23.3274M,
                     CreatedAt = DateTime.UtcNow,
-                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff"
+                    UserId = "b11f4443-0e58-4bc1-8c91-0d18e12b7f02",
                 };
 
                 var signal5 = new Signal
@@ -88,7 +112,7 @@
                     Latitude = 42.6845M,
                     Longitude = 23.3092M,
                     CreatedAt = DateTime.UtcNow,
-                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff"
+                    UserId = "b11f4443-0e58-4bc1-8c91-0d18e12b7f02",
                 };
 
                 var signal7 = new Signal
