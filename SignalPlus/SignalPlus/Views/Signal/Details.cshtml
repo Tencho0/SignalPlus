@@ -1,0 +1,24 @@
+﻿@model Signal
+
+@{
+    ViewData["Title"] = "Детайли за сигнал";
+}
+
+<div class="signal-details-container">
+    <h2><i class="fa-solid fa-circle-info"></i> @Model.Title</h2>
+
+    <div class="meta">
+        <span class="badge">#@Model.Id</span>
+        <span class="status">@Model.Status</span>
+        <span class="category">@Model.Category</span>
+        <span class="date">@Model.CreatedAt.ToString("dd MMMM yyyy г., HH:mm ч.")</span>
+    </div>
+
+    <p><i class="fa-solid fa-location-dot"></i> <strong>Адрес:</strong> @Model.LocationAddress</p>
+
+    <p><strong>Описание:</strong><br /> @Model.Description</p>
+@* 
+    <p><strong>Подаден от:</strong> @Model.User.Name</p> *@
+
+    <p><strong>Координати:</strong> @Model.Latitude, @Model.Longitude</p>
+</div>

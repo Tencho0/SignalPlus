@@ -7,7 +7,9 @@
     public interface ISignalService
     {
         Task<IEnumerable<Signal>> GetAllSignalsAsync();
-        
+
+        Task<Signal?> GetByIdAsync(int id);
+
         Task<IEnumerable<Signal>> GetSignalsByStatusAsync(Status status);
 
         Task<IEnumerable<Signal>> GetSignalsByUserIdAsync(string userId);

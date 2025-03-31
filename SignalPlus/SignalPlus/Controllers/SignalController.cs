@@ -44,7 +44,14 @@
             return View(signals);
         }
 
-        // Show form to submit a new signal
+        public async Task<IActionResult> Details(int id)
+        {
+            var signal = await _signalService.GetByIdAsync(id);
+            if (signal == null)
+                return NotFound();
+
+            return View(signal);
+        }
 
         [HttpGet("/newSignal")]
         public IActionResult NewSignal()

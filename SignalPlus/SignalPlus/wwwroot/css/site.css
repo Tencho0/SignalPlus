@@ -61,11 +61,13 @@ h1 {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
 }
+
 @media (min-width: 992px) {
     .cards {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
 .card {
     background-color: white;
     border: 1px solid #ddd;
@@ -799,3 +801,45 @@ input[disabled] {
             border-top: 1px solid #eee;
         }
 }
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+    .card-link:hover .card {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transform: scale(1.01);
+        transition: 0.2s ease;
+        cursor: pointer;
+    }
+
+
+
+
+
+
+
+.signal-details-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+    .signal-details-container .meta {
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+        color: #666;
+    }
+
+    .signal-details-container .badge {
+        background: goldenrod;
+        color: white;
+        padding: 3px 8px;
+        border-radius: 6px;
+        margin-right: 10px;
+    }

@@ -83,6 +83,16 @@
 
             return signal;
         }
+
+        public async Task<Signal?> GetByIdAsync(int id)
+        {
+            var signal = await _context.Signals
+                // .Include(s => s.Photos) // assuming Signal has a collection of Photo entities
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            //TODO: Add DTO for this purpose
+            return signal;
+        }
     }
 
 }
