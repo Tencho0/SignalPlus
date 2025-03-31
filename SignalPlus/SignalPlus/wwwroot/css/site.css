@@ -843,3 +843,58 @@ input[disabled] {
         border-radius: 6px;
         margin-right: 10px;
     }
+
+
+
+
+
+
+
+
+
+.not-found-wrapper {
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.not-found-code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 120px;
+    font-weight: bold;
+    color: #ffd400;
+    gap: 20px;
+}
+
+.not-found-wrapper h1 {
+    margin-top: 30px;
+    font-size: 28px;
+    color: #222;
+}
+
+.not-found-wrapper p {
+    color: #555;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.not-found-button {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #ffd400;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+    .not-found-button:hover {
+        background-color: #a17900;
+        color: white;
+        text-decoration: none;
+    }
