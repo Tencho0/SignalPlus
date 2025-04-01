@@ -261,27 +261,34 @@ h1 {
 }
 
 /* === ABOUT PAGE === */
-.main-content p {
-    text-align: justify;
-    margin-bottom: 16px;
-    white-space: pre-line;
-    padding: 0 20px;
+.main-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: left;
+    line-height: 1.6;
+    font-size: 16px;
 }
 
-    .main-content p.text-block {
-        text-align: left;
-        padding: 0;
-        white-space: pre;
+    .main-content p {
+        margin-bottom: 1.2rem;
+        white-space: normal;
     }
 
-.main-content ul {
-    list-style: disc;
-    padding-left: 24px;
-}
+        .main-content p.text-block {
+            white-space: normal;
+        }
 
-    .main-content ul li {
-        margin-bottom: 8px;
+    .main-content ul {
+        list-style: disc;
+        padding-left: 20px;
+        margin-bottom: 1.5rem;
     }
+
+        .main-content ul li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
 
 .statistics {
     text-align: center;
