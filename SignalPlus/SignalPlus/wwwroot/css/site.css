@@ -898,3 +898,18 @@ input[disabled] {
         color: white;
         text-decoration: none;
     }
+
+
+
+
+
+
+
+
+
+
+.mailbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
