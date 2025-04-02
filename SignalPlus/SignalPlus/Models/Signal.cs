@@ -30,6 +30,9 @@
 
         public decimal Longitude { get; set; }
 
+        // null = pending, true = accepted, false = declined
+        public bool? IsApproved { get; set; } = null;
+
         [Required]
         public string UserId { get; set; }
 
