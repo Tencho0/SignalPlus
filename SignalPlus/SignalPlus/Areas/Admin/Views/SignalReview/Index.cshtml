@@ -45,7 +45,7 @@
 
                 <select name="isApproved">
                     <option value="">Всички</option>
-                    @foreach (var category in new[] {"За Проверка", "Отхвърлено" })
+                    @foreach (var category in new[] { "За Проверка", "Отхвърлено" })
                     {
                         <option value="@category" selected="@(Context.Request.Query["isApproved"] == category.ToString())">
                             @category
@@ -63,7 +63,7 @@
             {
                 @foreach (var signal in Model)
                 {
-                    <a href="@Url.Action("Details", "Signal", new { id = signal.Id })" class="card-link">
+                    <a href="@Url.Action("Details", "Signal", new {area="", id = signal.Id })" class="card-link">
                         <div class="card">
                             <div class="card-header">
                                 <i class="fa-solid fa-bus"></i> @signal.Title
@@ -73,6 +73,15 @@
                                     <span class="badge">#@signal.Id</span>
                                     <span class="status-@(signal.Status == SignalPlus.Models.Enums.Status.Регистриран ? "registered" : "completed")">
                                         @signal.Status
+                                    </span>
+                                    <span class="status-@(
+                                            signal.IsApproved == null ? "pending" :
+                                            signal.IsApproved == true ? "approved" : "declined"
+                                        )">
+                                        @(
+                                            signal.IsApproved == null ? "За одобрение" :
+                                            signal.IsApproved == true ? "Одобрен" : "Отхвърлен"
+                                            )
                                     </span>
                                 </p>
                                 <p><i class="fa-solid fa-location-dot"></i> @signal.LocationAddress</p>
@@ -96,5 +105,18 @@
             <button class="arrow">&rarr;</button>
         </div>
     </div>
+    <style>
+        .status-pending {
+            color: orange;
+        }
+
+        .status-approved {
+            color: green;
+        }
+
+        .status-declined {
+            color: red;
+        }
+    </style>
 </body>
 </html>

@@ -1,5 +1,6 @@
 ﻿namespace SignalPlus.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using SignalPlus.DTOs.Signal;
@@ -24,7 +25,8 @@
         public async Task<IActionResult> AllSignals(string searchQuery, Status? status, Category? category)
         {
             var signals = await _signalService.GetAllSignalsAsync();
-
+            signals = signals.Where(x => x.IsApproved == true);
+            
             // Apply filters if values are provided
             if (!string.IsNullOrEmpty(searchQuery))
             {
@@ -82,5 +84,24 @@
             // TODO: Save uploaded images, if any
         }
 
+        [HttpPost]
+        // [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Approve(int id)
+        {
+            var success = await _signalService.ApproveAsync(id);
+            if (!success) return NotFound();
+
+            return RedirectToAction("Details", new { id });
+        }
+
+        [HttpPost]
+        // [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Decline(int id)
+        {
+            var success = await _signalService.DeclineAsync(id);
+            if (!success) return NotFound();
+
+            return RedirectToAction("Details", new { id });
+        }
     }
 }

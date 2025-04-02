@@ -37,13 +37,13 @@
         // Get signals by category
         public async Task<IEnumerable<Signal>> GetSignalsByCategoryAsync(Category category)
         {
-            return await _context.Signals.Where(s => s.Category == category).ToListAsync();
+            return await _context.Signals.Where(s => s.Category == category && s.IsApproved == true).ToListAsync();
         }
 
         // Get last 3 signals
         public async Task<IEnumerable<Signal>> GetLastThreeSignalsAsync()
         {
-            return await _context.Signals.OrderByDescending(s => s.CreatedAt).Take(3).ToListAsync();
+            return await _context.Signals.Where(s => s.IsApproved == true).OrderByDescending(s => s.CreatedAt).Take(3).ToListAsync();
         }
 
         // Get total signals count
@@ -93,6 +93,29 @@
             //TODO: Add DTO for this purpose
             return signal;
         }
+
+        public async Task<bool> ApproveAsync(int id)
+        {
+            var signal = await _context.Signals.FindAsync(id);
+            if (signal == null) return false;
+
+            signal.IsApproved = true;
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> DeclineAsync(int id)
+        {
+            var signal = await _context.Signals.FindAsync(id);
+            if (signal == null) return false;
+
+            signal.IsApproved = false;
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
     }
 
 }

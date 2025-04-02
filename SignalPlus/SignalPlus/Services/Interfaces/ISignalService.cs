@@ -23,6 +23,10 @@
         Task<int> GetCompletedSignalsCountAsync();
 
         Task<Signal> CreateSignalAsync(User user, NewSignalDTO model);
+
+        Task<bool> ApproveAsync(int id);
+
+        Task<bool> DeclineAsync(int id);
     }
 
 }
