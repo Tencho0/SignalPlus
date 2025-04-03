@@ -46,7 +46,7 @@
                 }
             }
 
-            return View(signals);
+            return View(signals.OrderByDescending(s => s.CreatedAt));
         }
     }
 }
