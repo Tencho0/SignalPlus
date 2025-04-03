@@ -4,6 +4,12 @@
     ViewData["Title"] = "Детайли за сигнал";
 }
 
+<div class="breadcrumbs">
+    <a href="@Url.Action("Index", "Home")">НАЧАЛО</a> / <a href="@Url.Action("AllSignals")">СИГНАЛИ</a> / <a href="#">@Model.Title.ToUpper()</a>
+</div>
+
+<h1>ДАННИ ЗА СИГНАЛ</h1>
+
 <div class="signal-details-container">
     <h2><i class="fa-solid fa-circle-info"></i> @Model.Title</h2>
     @* @if (User.IsInRole("Admin"))
