@@ -117,6 +117,27 @@
             await _userManager.UpdateAsync(user);
         }
 
+        public async Task DeleteUserProfileAsync(User? user)
+        {
+            if (user != null)
+            {
+                user.Name = "*" + user.Id;
+                user.Email = "*" + user.Id;
+                user.PhoneNumber = "*" + user.Id;
+                user.UserName = "deleteduser_" + user.Id;
+                user.NormalizedUserName = ("deleteduser_" + user.Id).ToUpper();
+
+                var result = await _userManager.UpdateAsync(user);
+                if (!result.Succeeded)
+                    throw new Exception("Failed to delete user profile");
+
+                return;
+            }
+
+            throw new Exception("Failed to delete user profile");
+        }
+
+
         public async Task<IdentityResult> ChangePasswordAsync(User user, string newPassword)
         {
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);

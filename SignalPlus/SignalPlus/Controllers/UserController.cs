@@ -106,6 +106,17 @@
             return View(profile);
         }
 
+        [HttpPost]
+        // [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteUserAccount()
+        {
+            var user = await _userService.GetCurrentUserAsync(User);
+            await _userService.DeleteUserProfileAsync(user);
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+
+            return RedirectToAction("Index", "Home");
+        }
+
         private async Task SignInUser(User model)
         {
             var claims = new List<Claim>
