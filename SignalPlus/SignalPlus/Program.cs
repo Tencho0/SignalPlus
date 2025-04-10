@@ -5,6 +5,7 @@ using SignalPlus.Services;
 using Microsoft.AspNetCore.Identity;
 using SignalPlus.Models;
 using System;
+using SignalPlus.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,26 +18,28 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddIdentity<User, IdentityRole>()
 .AddEntityFrameworkStores<ApplicationDbContext>()
-.AddDefaultTokenProviders();
+.AddDefaultTokenProviders(); 
 
 builder.Services.AddScoped<ISignalService, SignalService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    try
-    {
-        var context = services.GetRequiredService<ApplicationDbContext>();
-        DatabaseSeeder.Seed(context);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"An error occurred seeding the DB: {ex.Message}");
-    }
-}
+app.PrepareDatabase();
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    try
+//    {
+//        var context = services.GetRequiredService<ApplicationDbContext>();
+//        DatabaseSeeder.Seed(context);
+//    }
+//    catch (Exception ex)
+//    {
+//        Console.WriteLine($"An error occurred seeding the DB: {ex.Message}");
+//    }
+//}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -12,6 +12,8 @@
 
         Task<bool> RegisterUserAsync(RegisterDTO register);
 
+        Task LogoutAsync();
+
         Task<MyProfileDto?> GetCurrentUserProfileAsync();
 
         Task<User?> GetCurrentUserAsync(ClaimsPrincipal principal);

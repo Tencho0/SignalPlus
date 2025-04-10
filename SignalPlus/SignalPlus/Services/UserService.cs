@@ -14,25 +14,27 @@
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserService(ApplicationDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IHttpContextAccessor httpContextAccessor)
+        public UserService(ApplicationDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IHttpContextAccessor httpContextAccessor, SignInManager<User> signInManager)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
             _httpContextAccessor = httpContextAccessor;
+            _signInManager = signInManager;
         }
 
         public async Task<User?> LoginUserAsync(string email, string password)
         {
-            var user = _context.Users.FirstOrDefault(u => u.UserName.ToLower() == email.ToLower());
+            var user = await _userManager.FindByNameAsync(email);
+            if (user == null) return null;
 
             bool isValid = await _userManager.CheckPasswordAsync(user, password);
-            if (user == null || !isValid)
-            {
-                return null;
-            }
+            if (!isValid) return null;
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
 
             return user;
         }
@@ -61,6 +63,11 @@
             {
                 return false;
             }
+        }
+
+        public async Task LogoutAsync()
+        {
+            await _signInManager.SignOutAsync();
         }
 
         public async Task<MyProfileDto?> GetCurrentUserProfileAsync()

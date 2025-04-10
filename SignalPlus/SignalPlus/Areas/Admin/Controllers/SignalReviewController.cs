@@ -1,11 +1,12 @@
 ﻿namespace SignalPlus.Areas.Admin.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using SignalPlus.Models.Enums;
     using SignalPlus.Services.Interfaces;
 
     [Area("Admin")]
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Constants.AdministratorRoleName)]
     public class SignalReviewController : Controller
     {
         private readonly ISignalService _signalService;
