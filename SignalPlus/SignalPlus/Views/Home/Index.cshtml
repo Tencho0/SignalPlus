@@ -5,4 +5,45 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Authenticated: @User.Identity.IsAuthenticated</p>
+
+    <h3>Claims</h3>
+    <ul>
+        @foreach (var claim in User.Claims)
+        { 
+            <li>@claim.Type: @claim.Value</li>
+        }
+    </ul>
+
+
+    @if (User.IsInRole(Constants.AdministratorRoleName))
+    {
+        <p>You are an Admin ✅</p>
+    }
+    else
+    {
+        <p>You are NOT in the Admin role ❌</p>
+    }
+
+    <ul>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <li>
+                <a asp-controller="User" asp-action="Login">Login</a>
+            </li>
+            <li>
+                <a asp-controller="User" asp-action="Register">Register</a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="#">Hello, @User.Identity.Name</a>
+            </li>
+
+            <li>
+                <a asp-controller="User" asp-action="Logout">Logout</a>
+            </li>
+        }
+    </ul>
 </div>

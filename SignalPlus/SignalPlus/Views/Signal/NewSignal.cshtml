@@ -1,24 +1,145 @@
-﻿@using SignalPlus.Models.Enums
-@model SignalPlus.Models.Signal
+﻿@model SignalPlus.DTOs.Signal.NewSignalDTO
 
-<h2>Submit New Signal</h2>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<style>
+    .signal-form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        font-family: sans-serif;
+    }
 
-<form asp-action="NewSignal" asp-controller="Signal" method="post">
-   <label for="Title">Заглавие:</label>
-    <input asp-for="Title" class="form-control" required />
-    <span asp-validation-for="Title" class="text-danger"></span>
+        .signal-form h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
 
-    <label for="Description">Описание:</label>
-    <textarea asp-for="Description" class="form-control" required></textarea>
-    <span asp-validation-for="Description" class="text-danger"></span>
+        .signal-form label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
 
-    <label for="Category">Категория:</label>
-    <select asp-for="Category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control"></select>
+        .signal-form input,
+        .signal-form textarea,
+        .signal-form select {
+            width: 100%;
+            padding: 0.6rem;
+            margin-top: 0.3rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+            .signal-form input[type="file"] {
+                padding: 0.3rem;
+            }
+
+        .signal-form .checkbox {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+            .signal-form .checkbox input {
+                width: auto;
+                margin-right: 0.5rem;
+            }
+
+        .signal-form button {
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+            .signal-form button:hover {
+                background-color: #45a049;
+            }
+</style>
+<form asp-action="NewSignal" asp-controller="Signal" method="post" enctype="multipart/form-data" class="signal-form">
+    <h2>Подай сигнал</h2>
+
+    <label>1. Адрес или локация от картата:</label>
+    <input asp-for="Address" class="form-control" placeholder="Въведете адрес" />
+    <span asp-validation-for="Address" class="text-danger"></span>
+
+    <label>2. Категория:</label>
+    <select asp-for="Category" class="form-control">
+        <option disabled selected value="">-- Изберете категория --</option>
+        @foreach (var cat in Enum.GetValues(typeof(SignalPlus.Models.Enums.Category)))
+        {
+            <option value="@cat">@cat</option>
+        }
+    </select>
     <span asp-validation-for="Category" class="text-danger"></span>
 
-    <label for="LocationAddress">Адрес:</label>
-    <input asp-for="LocationAddress" class="form-control" required />
-    <span asp-validation-for="LocationAddress" class="text-danger"></span>
+    <label>3. Заглавие на сигнала:</label>
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
 
-    <button type="submit" class="btn btn-primary">Подай сигнал</button>
+    <label>4. Описание на сигнала:</label>
+    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+
+    @*   <label>5. Качете снимки:</label>
+    <input asp-for="Photos" type="file" multiple class="form-control" />
+    <span asp-validation-for="Photos" class="text-danger"></span> *@
+
+    <label>6. Име на подател:</label>
+    <input asp-for="SenderName" class="form-control" />
+    <span asp-validation-for="SenderName" class="text-danger"></span>
+
+    <label>7. Телефон на подател:</label>
+    <input asp-for="SenderPhone" class="form-control" />
+    <span asp-validation-for="SenderPhone" class="text-danger"></span>
+
+    <label>8. Имейл на подател:</label>
+    <input asp-for="SenderEmail" class="form-control" />
+    <span asp-validation-for="SenderEmail" class="text-danger"></span>
+
+    <p style="margin-top: 1rem; font-size: 0.95rem; color: #555;">
+        Искаме вашето име, телефон и e-mail, за да се свържем с Вас при обработка на подадения от Вас сигнал.<br />
+        Вашите данни ще бъдат използвани единствено с цел обработка на подадения от вас сигнал.<br />
+        Моля, прочетете внимателно текста на <a href="/privacy" target="_blank">"Информация за обработване на лични данни"</a>.
+    </p>
+
+    <div class="checkbox">
+        <input asp-for="IsOver14" class="form-check-input" type="checkbox" required />
+        <label asp-for="IsOver14" class="form-check-label">Имам навършени 14 години *</label>
+        <span asp-validation-for="IsOver14" class="text-danger"></span>
+    </div>
+
+    <div class="checkbox">
+        <input asp-for="AcceptsPrivacy" class="form-check-input" type="checkbox" required />
+        <label asp-for="AcceptsPrivacy" class="form-check-label">Съгласен съм с условията за обработване на личните данни *</label>
+        <span asp-validation-for="AcceptsPrivacy" class="text-danger"></span>
+    </div>
+
+    <div class="checkbox">
+        <input asp-for="IsNameVisible" class="form-check-input" type="checkbox" />
+        <label asp-for="IsNameVisible" class="form-check-label">Съгласен/на съм името ми да бъде видимо при публикуването на сигнала</label>
+    </div>
+
+    <div class="g-recaptcha" data-sitekey="@Configuration["GoogleReCaptcha:SiteKey"]"></div>
+    <span id="captcha-error" class="text-danger" style="display:none;">Моля, потвърдете, че не сте робот.</span>
+    <button type="submit">Изпрати сигнал</button>
 </form>
+
+
+<script>
+    document.querySelector('form').addEventListener('submit', function (e) {
+        var captchaResponse = grecaptcha.getResponse();
+        if (!captchaResponse) {
+            e.preventDefault();
+            document.getElementById('captcha-error').style.display = 'block';
+        }
+    });
+</script>

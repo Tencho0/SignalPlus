@@ -1,0 +1,42 @@
+﻿@model Signal
+
+@{
+    ViewData["Title"] = "Детайли за сигнал";
+}
+
+<div class="breadcrumbs">
+    <a href="@Url.Action("Index", "Home")">НАЧАЛО</a> / <a href="@Url.Action("AllSignals")">СИГНАЛИ</a> / <a href="#">@Model.Title.ToUpper()</a>
+</div>
+
+<h1>ДАННИ ЗА СИГНАЛ</h1>
+
+<div class="signal-details-container">
+    <h2><i class="fa-solid fa-circle-info"></i> @Model.Title</h2>
+    @* @if (User.IsInRole("Admin"))
+    { *@
+        <form asp-action="Approve" method="post" style="display:inline;">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i> Одобри</button>
+        </form>
+
+        <form asp-action="Decline" method="post" style="display:inline;">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-xmark"></i> Отхвърли</button>
+        </form>
+    @* } *@
+
+    <div class="meta">
+        <span class="badge">#@Model.Id</span>
+        <span class="status">@Model.Status</span>
+        <span class="category">@Model.Category</span>
+        <span class="date">@Model.CreatedAt.ToString("dd MMMM yyyy г., HH:mm ч.")</span>
+    </div>
+
+    <p><i class="fa-solid fa-location-dot"></i> <strong>Адрес:</strong> @Model.LocationAddress</p>
+
+    <p><strong>Описание:</strong><br /> @Model.Description</p>
+    @*
+    <p><strong>Подаден от:</strong> @Model.User.Name</p> *@
+
+    <p><strong>Координати:</strong> @Model.Latitude, @Model.Longitude</p>
+</div>

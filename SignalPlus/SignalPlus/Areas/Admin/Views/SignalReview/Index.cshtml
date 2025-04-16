@@ -1,0 +1,122 @@
+﻿@model IEnumerable<SignalPlus.Models.Signal>
+
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/site.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Търсене на сигнал</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="breadcrumbs">
+            <a href="@Url.Action("Index", "Home", new { area = "" })">НАЧАЛО</a> / <a href="#">АДМИНИСТРАТОР</a>
+        </div>
+
+        <h1>АДМИНИСТРАТОРСКИ ПАНЕЛ</h1>
+
+        <!-- Filters -->
+        <form method="get" asp-action="AllSignals" asp-controller="Signal">
+            <div class="filters">
+                <input type="text" name="searchQuery" placeholder="Търси" value="@Context.Request.Query["searchQuery"]">
+
+                <select name="status">
+                    <option value="">Всички</option>
+                    @foreach (var status in Enum.GetValues(typeof(SignalPlus.Models.Enums.Status)))
+                    {
+                        <option value="@status" selected="@(Context.Request.Query["status"] == status.ToString())">
+                            @status
+                        </option>
+                    }
+                </select>
+
+                <select name="category">
+                    <option value="">Всички</option>
+                    @foreach (var category in Enum.GetValues(typeof(SignalPlus.Models.Enums.Category)))
+                    {
+                        <option value="@category" selected="@(Context.Request.Query["category"] == category.ToString())">
+                            @category
+                        </option>
+                    }
+                </select>
+
+                <select name="isApproved">
+                    <option value="">Всички</option>
+                    @foreach (var category in new[] { "За Проверка", "Отхвърлено" })
+                    {
+                        <option value="@category" selected="@(Context.Request.Query["isApproved"] == category.ToString())">
+                            @category
+                        </option>
+                    }
+                </select>
+
+                <button type="submit" class="btn btn-primary">Филтрирай</button>
+            </div>
+        </form>
+
+        <!-- Cards -->
+        <div class="cards">
+            @if (Model.Any())
+            {
+                @foreach (var signal in Model)
+                {
+                    <a href="@Url.Action("Details", "Signal", new {area="", id = signal.Id })" class="card-link">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa-solid fa-bus"></i> @signal.Title
+                            </div>
+                            <div class="card-content">
+                                <p>
+                                    <span class="badge">#@signal.Id</span>
+                                    <span class="status-@(signal.Status == SignalPlus.Models.Enums.Status.Регистриран ? "registered" : "completed")">
+                                        @signal.Status
+                                    </span>
+                                    <span class="status-@(
+                                            signal.IsApproved == null ? "pending" :
+                                            signal.IsApproved == true ? "approved" : "declined"
+                                        )">
+                                        @(
+                                            signal.IsApproved == null ? "За одобрение" :
+                                            signal.IsApproved == true ? "Одобрен" : "Отхвърлен"
+                                            )
+                                    </span>
+                                </p>
+                                <p><i class="fa-solid fa-location-dot"></i> @signal.LocationAddress</p>
+                                <p><i class="fa-solid fa-circle-info"></i> @signal.Category</p>
+                                <p><i class="fa-regular fa-calendar"></i> @signal.CreatedAt.ToString("dd MMMM yyyy г., HH:mm ч.")</p>
+                            </div>
+                        </div>
+                    </a>
+                }
+            }
+            else
+            {
+                <p>Няма налични сигнали.</p>
+            }
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="arrow">&larr;</button>
+            <button class="active">1</button>
+            <button class="arrow">&rarr;</button>
+        </div>
+    </div>
+    <style>
+        .status-pending {
+            color: orange;
+        }
+
+        .status-approved {
+            color: green;
+        }
+
+        .status-declined {
+            color: red;
+        }
+    </style>
+</body>
+</html>

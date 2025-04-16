@@ -1,6 +1,7 @@
 ﻿namespace SignalPlus.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using SignalPlus.Models.Enums;
 
     public class Signal
@@ -28,5 +29,14 @@
         public decimal Latitude { get; set; }
 
         public decimal Longitude { get; set; }
+
+        // null = pending, true = accepted, false = declined
+        public bool? IsApproved { get; set; } = null;
+
+        [Required]
+        public string UserId { get; set; }
+
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; }
     }
 }

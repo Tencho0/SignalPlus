@@ -1,74 +1,84 @@
 ﻿<!DOCTYPE html>
 <html lang="bg">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signal Plus About</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal Plus About</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <div>НАЧАЛО / ЗА СИГНАЛ+</div>
-      <h1>ЗА СИГНАЛ+</h1>
-    </div>
+    <div class="container">
+        <!-- Header -->
+        <div class="breadcrumbs">
+            <a href="@Url.Action("Index", "Home")">НАЧАЛО</a> / <a href="#">ЗА СИГНАЛ+</a>
+        </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-      <p class="text-block">Системата за подаване на сигнали на Община Якоруда има за цел да повиши гражданската
-  активност за отстраняване на нередности на територията на общината. Поставените чрез
+        <h1>ЗА СИГНАЛ+</h1>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <p class="text-block">
+                Системата за подаване на сигнали на Община Якоруда има за цел да повиши гражданската
+                активност за отстраняване на нередности на територията на общината. Поставените чрез
                 сигналите проблеми ще се насочват по компетентност за отстраняване
 
- Ръководството на Община Якоруда вярва, че будната гражданска позиция е най-добрият
-    коректив в поддръжката на заобикалящата ни (градска) среда и инфраструктура.</p>
+                Ръководството на Община Якоруда вярва, че будната гражданска позиция е най-добрият
+                коректив в поддръжката на заобикалящата ни (градска) среда и инфраструктура.
+            </p>
 
-      <p>Платформата дава възможност за:</p>
-      <ul>
-        <li>подаване на нов сигнал към служителите в Община Якоруда;</li>
-        <li>обединяване на сигнали, подадени за едно и също нередност;</li>
-        <li>видимост за всички сигнали, подадени чрез системата, по категория в даден район, квартал или населено място;</li>
-        <li>статистическа информация за броя на получените и обработени сигнали в реално време;</li>
-        <li>и най-важното - лесно проследяване на работата по сигнала.</li>
-      </ul>
-    </div>
-    <p>Полученият в системата сигнал винаги се завежда и в деловодната система на Община Якоруда.
-    Подателят получава имейл с входящ номер на сигнала.</p>
-    <p>Системата дава възможност за по-добра проследяемост на сигнала и за действията, които са предприети по него. Новото тук е възможността за обединяване на подадените за един и същи проблем сигнали, което повишава ефективността на работата по сигналите.</p>    
-        
-    <!-- Statistics -->
-   <div class="statistics">
-    <h2>Информация за постъпилите сигнали</h2>
-    <div class="stat-box">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-        </svg>
-        <div class="label">ОБЩО РЕГИСТРИРАНИ</div>
-        <div class="value">@ViewData["TotalSignals"]</div>
-    </div>
-    <div class="stat-box">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-        </svg>
-        <div class="label">ОТ ТЯХ ПРИКЛЮЧЕНИ</div>
-        <div class="value">@ViewData["CompletedSignals"]</div>
-    </div>
-   </div>
+            <p>Платформата дава възможност за:</p>
+            <ul>
+                <li>подаване на нов сигнал към служителите в Община Якоруда;</li>
+                <li>обединяване на сигнали, подадени за едно и също нередност;</li>
+                <li>видимост за всички сигнали, подадени чрез системата, по категория в даден район, квартал или населено място;</li>
+                <li>статистическа информация за броя на получените и обработени сигнали в реално време;</li>
+                <li>и най-важното - лесно проследяване на работата по сигнала.</li>
+            </ul>
+            <p>
+                Полученият в системата сигнал винаги се завежда и в деловодната система на Община Якоруда.
+                Подателят получава имейл с входящ номер на сигнала.
+            </p>
+            <p>Системата дава възможност за по-добра проследяемост на сигнала и за действията, които са предприети по него. Новото тук е възможността за обединяване на подадените за един и същи проблем сигнали, което повишава ефективността на работата по сигналите.</p>
+        </div>
 
-    <!-- Call to Action -->
-    <div class="cta">
-      <h3>БЪДИ АКТИВЕН!</h3>
-      <p>Виждаш някаква нередност?</p>
-      <p>Подаването на сигнал е по-лесно от всякога! Всичко се случва онлайн, без чакане и попълване на документи.</p>
-      <div class="button-container">
-        <button href="/newSignal">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-          </svg>
-          ПОДАЙ СИГНАЛ
-        </button>
-      </div>
+        <!-- Statistics -->
+        <div class="statistics">
+            <h2>Информация за постъпилите сигнали</h2>
+            <div class="stat-box">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+                <div class="label">ОБЩО РЕГИСТРИРАНИ</div>
+                <div class="value">@ViewData["TotalSignals"]</div>
+            </div>
+            <div class="stat-box">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+                <div class="label">ОТ ТЯХ ПРИКЛЮЧЕНИ</div>
+                <div class="value">@ViewData["CompletedSignals"]</div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta">
+            <h3>БЪДИ АКТИВЕН!</h3>
+            <p>Виждаш някаква нередност?</p>
+            <p>Подаването на сигнал е по-лесно от всякога! Всичко се случва онлайн, без чакане и попълване на документи.</p>
+            <a href="/newSignal" class="submit-signal-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="black">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118
+             14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0
+             10-4 0v.341C7.67 6.165 6 8.388 6
+             11v3.159c0 .538-.214 1.055-.595
+             1.436L4 17h5m6 0v1a3 3 0
+             11-6 0v-1m6 0H9" />
+                </svg>
+                <span>ПОДАЙ СИГНАЛ</span>
+            </a>
+
+        </div>
     </div>
-  </div>
 </body>
 </html>
