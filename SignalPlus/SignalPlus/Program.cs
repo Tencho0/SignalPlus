@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using SignalPlus.Models;
 using System;
 using SignalPlus.Infrastructure;
+using SignalPlus.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<User, IdentityRole>()
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders(); 
+
+builder.Services.AddHttpClient();
+builder.Services.Configure<GoogleReCaptchaConfig>(
+    builder.Configuration.GetSection("GoogleReCaptcha"));
+builder.Services.AddTransient<IReCaptchaService, ReCaptchaService>();
 
 builder.Services.AddScoped<ISignalService, SignalService>();
 builder.Services.AddScoped<IUserService, UserService>();
