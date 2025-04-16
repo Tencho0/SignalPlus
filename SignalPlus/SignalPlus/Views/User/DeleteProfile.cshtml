@@ -12,7 +12,9 @@
             <h3 class="text-center">Предстоящо изтриване на профил</h3>
             <h5 class="text-center mb-3"><p>Ако желаете да изтриете профила си, моля, натиснете бутона долу.</p></h5>
             <form asp-action="DeleteUserAccount" asp-controller="User" method="post" onsubmit="return confirm('Сигурни ли сте, че искате да изтриете профила си?');">
-                <button type="submit" class="btn btn-danger">Изтриване</button>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-danger">Изтриване</button>
+                </div>
             </form>
         </div>
     </div>

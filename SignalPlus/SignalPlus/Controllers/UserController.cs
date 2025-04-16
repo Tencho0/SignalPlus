@@ -122,21 +122,6 @@
             return RedirectToAction("Index", "Home");
         }
 
-        //private async Task SignInUser(User model)
-        //{
-        //    var claims = new List<Claim>
-        //    {
-        //        new Claim(ClaimTypes.NameIdentifier, model.Id),
-        //        new Claim(ClaimTypes.Name, model.UserName ?? model.Email),
-        //        new Claim(ClaimTypes.Email, model.Email),
-        //    };
-
-        //    var identity = new ClaimsIdentity(claims, IdentityConstants.ApplicationScheme);
-
-        //    var principal = new ClaimsPrincipal(identity);
-        //    await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, principal);
-        //}
-
         [HttpPost]
         public async Task<IActionResult> UpdateProfile(MyProfileDto model)
         {
