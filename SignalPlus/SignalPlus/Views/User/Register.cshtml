@@ -1,5 +1,6 @@
 ﻿@model SignalPlus.DTOs.User.RegisterDTO
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <h2>Регистрация</h2>
 <form asp-action="Register" method="post">
     <div class="form-group">
@@ -18,5 +19,19 @@
         <label asp-for="Password"></label>
         <input asp-for="Password" type="password" class="form-control" />
     </div>
+
+    <div class="g-recaptcha" data-sitekey="@Configuration["GoogleReCaptcha:SiteKey"]"></div>
+    <span id="captcha-error" class="text-danger" style="display:none;">Моля, потвърдете, че не сте робот.</span>
+
     <button type="submit" class="btn btn-success">Регистрирай се</button>
 </form>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function (e) {
+        var captchaResponse = grecaptcha.getResponse();
+        if (!captchaResponse) {
+            e.preventDefault();
+            document.getElementById('captcha-error').style.display = 'block';
+        }
+    });
+</script>

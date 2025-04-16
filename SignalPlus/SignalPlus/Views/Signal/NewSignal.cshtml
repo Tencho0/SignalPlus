@@ -129,15 +129,17 @@
     </div>
 
     <div class="g-recaptcha" data-sitekey="@Configuration["GoogleReCaptcha:SiteKey"]"></div>
+    <span id="captcha-error" class="text-danger" style="display:none;">Моля, потвърдете, че не сте робот.</span>
     <button type="submit">Изпрати сигнал</button>
 </form>
 
+
 <script>
-    document.querySelector('.signal-form').addEventListener('submit', function (e) {
+    document.querySelector('form').addEventListener('submit', function (e) {
         var captchaResponse = grecaptcha.getResponse();
         if (!captchaResponse) {
-            alert("Моля, потвърдете, че не сте робот.");
             e.preventDefault();
+            document.getElementById('captcha-error').style.display = 'block';
         }
     });
 </script>

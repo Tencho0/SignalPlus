@@ -57,9 +57,19 @@
 
         // POST: /User/Register
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterDTO register)
+        public async Task<IActionResult> Register(RegisterDTO register, [FromServices] IReCaptchaService captchaService)
         {
-            if (!ModelState.IsValid) return View(register);
+            var recaptchaToken = Request.Form["g-recaptcha-response"];
+            var isCaptchaValid = await captchaService.VerifyToken(recaptchaToken);
+
+            if (!isCaptchaValid)
+            {
+                ModelState.AddModelError(string.Empty, "Моля, потвърдете, че не сте робот.");
+                return View(register);
+            }
+
+            if (!ModelState.IsValid)
+                return View(register);
 
             var success = await _userService.RegisterUserAsync(register);
             if (!success)

@@ -66,18 +66,12 @@
         public async Task<IActionResult> NewSignal(NewSignalDTO model, [FromServices] IReCaptchaService captchaService)
         {
             var recaptchaToken = Request.Form["g-recaptcha-response"];
-
-            if (string.IsNullOrEmpty(recaptchaToken))
-            {
-                ModelState.AddModelError(string.Empty, "Моля, потвърдете, че не сте робот.");
-                return View(model);
-            }
-
-            var isCaptchaValid = await captchaService.VerifyToken(recaptchaToken!);
+            var isCaptchaValid = await captchaService.VerifyToken(recaptchaToken);
 
             if (!isCaptchaValid)
             {
                 ModelState.AddModelError(string.Empty, "Моля, потвърдете, че не сте робот.");
+                return View(model);
             }
 
             if (!ModelState.IsValid)

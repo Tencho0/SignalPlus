@@ -16,8 +16,11 @@
             _config = config.Value;
         }
 
-        public async Task<bool> VerifyToken(string token)
+        public async Task<bool> VerifyToken(string? token)
         {
+            if (string.IsNullOrEmpty(token))
+                return false;
+
             var client = _httpClientFactory.CreateClient();
             var response = await client.PostAsync(
                 $"https://www.google.com/recaptcha/api/siteverify?secret={_config.SecretKey}&response={token}",

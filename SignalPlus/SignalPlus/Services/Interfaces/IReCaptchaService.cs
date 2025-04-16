@@ -2,6 +2,6 @@
 {
     public interface IReCaptchaService
     {
-        Task<bool> VerifyToken(string token);
+        Task<bool> VerifyToken(string? token);
     }
 }
