@@ -79,12 +79,37 @@
             }
         </div>
 
-        <!-- Pagination -->
-        <div class="pagination">
-            <button class="arrow">&larr;</button>
-            <button class="active">1</button>
-            <button class="arrow">&rarr;</button>
-        </div>
+
+        @if (ViewBag.TotalPages > 1)
+        {
+            <div class="pagination modern-pagination">
+                <!-- Left Arrow -->
+                <a class="arrow @(ViewBag.CurrentPage == 1 ? "disabled" : "")"
+                   href="@(ViewBag.CurrentPage == 1 ? "#" : Url.Action("AllSignals", new { page = ViewBag.CurrentPage - 1, searchQuery = ViewBag.SearchQuery, status = ViewBag.Status, category = ViewBag.Category }))">
+                    &larr;
+                </a>
+
+                <!-- Page Numbers -->
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    if (i == ViewBag.CurrentPage)
+                    {
+                        <span class="page current">@i</span>
+                    }
+                    else if (i >= ViewBag.CurrentPage - 1 && i <= ViewBag.CurrentPage + 1)
+                    {
+                        <a class="page"
+                           href="@Url.Action("AllSignals", new { page = i, searchQuery = ViewBag.SearchQuery, status = ViewBag.Status, category = ViewBag.Category })">@i</a>
+                    }
+                }
+
+                <!-- Right Arrow -->
+                <a class="arrow @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")"
+                   href="@(ViewBag.CurrentPage == ViewBag.TotalPages ? "#" : Url.Action("AllSignals", new { page = ViewBag.CurrentPage + 1, searchQuery = ViewBag.SearchQuery, status = ViewBag.Status, category = ViewBag.Category }))">
+                    &rarr;
+                </a>
+            </div>
+        }
     </div>
 </body>
 </html>

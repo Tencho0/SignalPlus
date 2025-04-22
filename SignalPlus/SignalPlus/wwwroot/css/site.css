@@ -920,3 +920,58 @@ input[disabled] {
     justify-content: center;
     align-items: center;
 }
+
+
+
+
+
+
+
+
+
+.modern-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+    font-family: sans-serif;
+}
+
+    .modern-pagination .arrow {
+        width: 36px;
+        height: 36px;
+        border: 2px solid #b58e1b;
+        color: #b58e1b;
+        font-size: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+        .modern-pagination .arrow:hover:not(.disabled) {
+            background-color: #b58e1b;
+            color: white;
+        }
+
+        .modern-pagination .arrow.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+    .modern-pagination .page {
+        font-size: 18px;
+        color: black;
+        text-decoration: none;
+    }
+
+        .modern-pagination .page.current {
+            font-weight: bold;
+            color: #b58e1b;
+            border: 2px solid black;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }

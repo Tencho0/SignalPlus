@@ -22,7 +22,7 @@
 
         // Show all signals
         [Route("/allsignals")]
-        public async Task<IActionResult> AllSignals(string searchQuery, Status? status, Category? category)
+        public async Task<IActionResult> AllSignals(string searchQuery, Status? status, Category? category, int page = 1, int pageSize = 3)
         {
             var signals = await _signalService.GetAllSignalsAsync();
             signals = signals.Where(x => x.IsApproved == true);
@@ -41,9 +41,24 @@
             if (category.HasValue)
             {
                 signals = signals.Where(s => s.Category == category.Value);
-            }
+            }  
+            
+             // Pagination
+            var totalItems = signals.Count();
+            var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
 
-            return View(signals);
+            var pagedSignals = signals
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.SearchQuery = searchQuery;
+            ViewBag.Status = status;
+            ViewBag.Category = category;
+
+            return View(pagedSignals);
         }
 
         public async Task<IActionResult> Details(int id)
