@@ -86,7 +86,7 @@
                 user = await _userService.CreateAnonymousUser(model);
             }
 
-            await _signalService.CreateSignalAsync(user, model);
+            await _signalService.CreateSignalAsync(user, model, model.Images);
 
             return RedirectToAction("AllSignals");
             // TODO: Send email confirmation with tracking number

@@ -93,6 +93,10 @@
     <input asp-for="Photos" type="file" multiple class="form-control" />
     <span asp-validation-for="Photos" class="text-danger"></span> *@
 
+    <label for="Images">5. Качи снимки</label>
+    <input type="file" name="Images" multiple accept="image/*" onchange="validateSize(this.files)" />
+    <small class="form-text text-muted">Максимален размер: <strong>10MB</strong> на снимка.</small>
+
     <label>6. Име на подател:</label>
     <input asp-for="SenderName" class="form-control" />
     <span asp-validation-for="SenderName" class="text-danger"></span>
@@ -130,6 +134,7 @@
 
     <div class="g-recaptcha" data-sitekey="@Configuration["GoogleReCaptcha:SiteKey"]"></div>
     <span id="captcha-error" class="text-danger" style="display:none;">Моля, потвърдете, че не сте робот.</span>
+
     <button type="submit">Изпрати сигнал</button>
 </form>
 
@@ -142,4 +147,16 @@
             document.getElementById('captcha-error').style.display = 'block';
         }
     });
+
+    function validateSize(files) {
+        const maxSize = 10 * 1024 * 1024; // 10MB
+        for (let file of files) {
+            if (file.size > maxSize) {
+                alert(`Файлът ${file.name} е по-голям от 10MB.`);
+                // Optionally clear the file input:
+                document.querySelector('input[name="Images"]').value = '';
+                break;
+            }
+        }
+    }
 </script>

@@ -58,7 +58,7 @@
             return await _context.Signals.CountAsync(s => s.Status == Status.Приключен);
         }
 
-        public async Task<Signal> CreateSignalAsync(User user, NewSignalDTO model)
+        public async Task<Signal> CreateSignalAsync(User user, NewSignalDTO model, List<IFormFile> images)
         {
             var signal = new Signal
             {
@@ -76,10 +76,38 @@
             user.Signals.Add(signal);
             _context.Signals.Add(signal);
 
-            // Optional: Handle image upload here later if you store images
-            // Optional: Generate tracking number and assign it to signal
-
             await _context.SaveChangesAsync();
+
+            // Optional: Generate tracking number and assign it to signal
+         
+            if (images != null && images.Any())
+            {
+                var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "SignalImages");
+                if (!Directory.Exists(uploadPath))
+                    Directory.CreateDirectory(uploadPath);
+
+                foreach (var image in images)
+                {
+                    if (image.Length > 0 && image.Length <= 10 * 1024 * 1024)
+                    {
+                        var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
+                        var filePath = Path.Combine(uploadPath, fileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await image.CopyToAsync(stream);
+                        }
+
+                        _context.SignalImages.Add(new SignalImage
+                        {
+                            SignalId = signal.Id,
+                            FilePath = $"/SignalImages/{fileName}"
+                        });
+                    }
+                }
+
+                await _context.SaveChangesAsync(); // Save image records
+            }
 
             return signal;
         }

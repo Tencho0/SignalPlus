@@ -38,5 +38,7 @@
 
         [ForeignKey(nameof(UserId))]
         public virtual User User { get; set; }
+
+        public virtual ICollection<SignalImage> Images { get; set; } = new List<SignalImage>();
     }
 }

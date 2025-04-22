@@ -12,5 +12,7 @@
         //public DbSet<User> Users { get; set; }
 
         public DbSet<Signal> Signals { get; set; }
+
+        public DbSet<SignalImage> SignalImages { get; set; }
     }
 }
