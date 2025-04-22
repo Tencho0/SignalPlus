@@ -58,7 +58,7 @@
             return await _context.Signals.CountAsync(s => s.Status == Status.Приключен);
         }
 
-        public async Task<Signal> CreateSignalAsync(User user, NewSignalDTO model, List<IFormFile> images)
+        public async Task<Signal> CreateSignalAsync(User? user, NewSignalDTO model, List<IFormFile> images)
         {
             var signal = new Signal
             {
@@ -70,10 +70,12 @@
                 LocationAddress = model.Address,
                 Latitude = 0, // TODO: Add from map or geolocation if available
                 Longitude = 0, // TODO: Same as above
-                UserId = user.Id,
                 User = user
             };
-            user.Signals.Add(signal);
+
+            if (user != null)
+                user.Signals.Add(signal);
+
             _context.Signals.Add(signal);
 
             await _context.SaveChangesAsync();

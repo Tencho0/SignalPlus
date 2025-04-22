@@ -33,11 +33,10 @@
         // null = pending, true = accepted, false = declined
         public bool? IsApproved { get; set; } = null;
 
-        [Required]
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
 
         public virtual ICollection<SignalImage> Images { get; set; } = new List<SignalImage>();
     }

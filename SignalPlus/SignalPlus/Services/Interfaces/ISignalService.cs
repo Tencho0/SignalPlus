@@ -22,7 +22,7 @@
         
         Task<int> GetCompletedSignalsCountAsync();
 
-        Task<Signal> CreateSignalAsync(User user, NewSignalDTO model, List<IFormFile> images);
+        Task<Signal> CreateSignalAsync(User? user, NewSignalDTO model, List<IFormFile> images);
 
         Task<bool> ApproveAsync(int id);
 

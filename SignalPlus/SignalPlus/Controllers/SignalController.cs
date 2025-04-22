@@ -22,7 +22,7 @@
 
         // Show all signals
         [Route("/allsignals")]
-        public async Task<IActionResult> AllSignals(string searchQuery, Status? status, Category? category, int page = 1, int pageSize = 3)
+        public async Task<IActionResult> AllSignals(string searchQuery, Status? status, Category? category, int page = 1, int pageSize = 9)
         {
             var signals = await _signalService.GetAllSignalsAsync();
             signals = signals.Where(x => x.IsApproved == true);
@@ -96,16 +96,10 @@
 
             User? user = await _userService.GetCurrentUserAsync(User);
 
-            if (user == null)
-            {
-                user = await _userService.CreateAnonymousUser(model);
-            }
-
             await _signalService.CreateSignalAsync(user, model, model.Images);
 
             return RedirectToAction("AllSignals");
             // TODO: Send email confirmation with tracking number
-            // TODO: Save uploaded images, if any
         }
 
         [HttpPost]

@@ -194,7 +194,6 @@ namespace SignalPlus.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -352,9 +351,7 @@ namespace SignalPlus.Migrations
                 {
                     b.HasOne("SignalPlus.Models.User", "User")
                         .WithMany("Signals")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
