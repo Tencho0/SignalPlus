@@ -22,10 +22,13 @@
             </form>
         }
 
-        <form asp-action="Decline" method="post" style="display:inline;">
-            <input type="hidden" name="id" value="@Model.Id" />
-            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-xmark"></i> Отхвърли</button>
-        </form>
+        if (Model.IsApproved != false)
+        {
+            <form asp-action="Decline" method="post" style="display:inline;">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-xmark"></i> Отхвърли</button>
+            </form>
+        }
     }
 
     <div class="meta">
