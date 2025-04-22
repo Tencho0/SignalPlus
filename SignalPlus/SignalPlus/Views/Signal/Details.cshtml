@@ -32,6 +32,19 @@
         <span class="date">@Model.CreatedAt.ToString("dd MMMM yyyy г., HH:mm ч.")</span>
     </div>
 
+    @if (Model.Images != null && Model.Images.Any())
+    {
+        <div class="signal-images">
+            <h3>Снимки</h3>
+            <div class="image-gallery">
+                @foreach (var img in Model.Images)
+                {
+                    <img src="@img.FilePath" alt="Снимка към сигнала" class="signal-image" />
+                }
+            </div>
+        </div>
+    }
+
     <p><i class="fa-solid fa-location-dot"></i> <strong>Адрес:</strong> @Model.LocationAddress</p>
 
     <p><strong>Описание:</strong><br /> @Model.Description</p>

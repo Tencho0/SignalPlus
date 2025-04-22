@@ -79,7 +79,7 @@
             await _context.SaveChangesAsync();
 
             // Optional: Generate tracking number and assign it to signal
-         
+
             if (images != null && images.Any())
             {
                 var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "SignalImages");
@@ -115,7 +115,7 @@
         public async Task<Signal?> GetByIdAsync(int id)
         {
             var signal = await _context.Signals
-                // .Include(s => s.Photos) // assuming Signal has a collection of Photo entities
+                .Include(s => s.Images)
                 .FirstOrDefaultAsync(s => s.Id == id);
 
             //TODO: Add DTO for this purpose
