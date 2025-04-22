@@ -12,18 +12,21 @@
 
 <div class="signal-details-container">
     <h2><i class="fa-solid fa-circle-info"></i> @Model.Title</h2>
-    @* @if (User.IsInRole("Admin"))
-    { *@
-        <form asp-action="Approve" method="post" style="display:inline;">
-            <input type="hidden" name="id" value="@Model.Id" />
-            <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i> Одобри</button>
-        </form>
+    @if (User.IsInRole(Constants.AdministratorRoleName))
+    {
+        if (Model.IsApproved == null || Model.IsApproved == false)
+        {
+            <form asp-action="Approve" method="post" style="display:inline;">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i> Одобри</button>
+            </form>
+        }
 
         <form asp-action="Decline" method="post" style="display:inline;">
             <input type="hidden" name="id" value="@Model.Id" />
             <button type="submit" class="btn btn-danger"><i class="fa-solid fa-xmark"></i> Отхвърли</button>
         </form>
-    @* } *@
+    }
 
     <div class="meta">
         <span class="badge">#@Model.Id</span>

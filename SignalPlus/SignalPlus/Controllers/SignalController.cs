@@ -94,7 +94,7 @@
         }
 
         [HttpPost]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = Constants.AdministratorRoleName)]
         public async Task<IActionResult> Approve(int id)
         {
             var success = await _signalService.ApproveAsync(id);
@@ -104,7 +104,7 @@
         }
 
         [HttpPost]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = Constants.AdministratorRoleName)]
         public async Task<IActionResult> Decline(int id)
         {
             var success = await _signalService.DeclineAsync(id);
