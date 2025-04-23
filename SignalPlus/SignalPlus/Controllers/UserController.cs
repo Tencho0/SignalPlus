@@ -13,6 +13,7 @@
     using Microsoft.AspNetCore.Identity;
     using SignalPlus.Services;
     using Microsoft.AspNetCore.Authorization;
+    using static System.Runtime.InteropServices.JavaScript.JSType;
 
     public class UserController : Controller
     {
@@ -96,10 +97,12 @@
             return View(profile);
         }
 
-        //TODO: [Authenticcated] -> if user is not logger he is anon user with random Id!
         public async Task<IActionResult> MySignals()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null) return RedirectToAction("Login");
+
             var userSignals = await _signalService.GetSignalsByUserIdAsync(userId);
             return View(userSignals);
         }
@@ -107,15 +110,20 @@
         public async Task<IActionResult> DeleteProfile()
         {
             var profile = await _userService.GetCurrentUserProfileAsync();
+            if (profile == null)
+                return RedirectToAction("Login");
 
             return View(profile);
         }
 
         [HttpPost]
-        // [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteUserAccount()
         {
             var user = await _userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+                return RedirectToAction("Login");
+
             await _userService.DeleteUserProfileAsync(user);
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
 

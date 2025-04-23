@@ -124,10 +124,8 @@
             await _userManager.UpdateAsync(user);
         }
 
-        public async Task DeleteUserProfileAsync(User? user)
+        public async Task DeleteUserProfileAsync(User user)
         {
-            if (user != null)
-            {
                 user.Name = "*" + user.Id;
                 user.Email = "*" + user.Id;
                 user.PhoneNumber = "*" + user.Id;
@@ -139,9 +137,6 @@
                     throw new Exception("Failed to delete user profile");
 
                 return;
-            }
-
-            throw new Exception("Failed to delete user profile");
         }
 
 

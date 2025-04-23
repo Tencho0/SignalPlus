@@ -19,8 +19,6 @@
         [StringLength(1000, ErrorMessage = "Описанието не може да надвишава 1000 символа.")]
         public string Description { get; set; }
 
-        //public IFormFileCollection Photos { get; set; }
-
         [Required(ErrorMessage = "Моля, въведете име.")]
         public string SenderName { get; set; }
 

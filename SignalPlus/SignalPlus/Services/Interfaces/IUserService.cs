@@ -22,7 +22,7 @@
 
         Task UpdateUserAsync(User user);
 
-        Task DeleteUserProfileAsync(User? user);
+        Task DeleteUserProfileAsync(User user);
 
         Task<IdentityResult> ChangePasswordAsync(User user, string newPassword);
     }
