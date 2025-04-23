@@ -38,7 +38,7 @@
         [Range(typeof(bool), "true", "true", ErrorMessage = "Моля, приемете условията за лични данни.")]
         public bool AcceptsPrivacy { get; set; }
 
-        public bool IsNameVisible { get; set; } 
+        public bool IsNameVisible { get; set; } = false;
 
         [Display(Name = "Качи снимки")]
         public List<IFormFile> Images { get; set; } = new();

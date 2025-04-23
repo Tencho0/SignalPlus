@@ -31,6 +31,21 @@
         }
     }
 
+    @if (Model.IsNameVisible || User.IsInRole(Constants.AdministratorRoleName))
+    {
+        <p><strong>Подател:</strong> @Model.SenderName</p>
+    }
+    else
+    {
+        <p><strong>Подател:</strong> <i>Скрито</i></p>
+    }
+
+    @if (User.IsInRole(Constants.AdministratorRoleName))
+    {
+        <p><strong>Телефон на подател:</strong> @Model.SenderPhone</p>
+        <p><strong>Имейл на подател:</strong> @Model.SenderEmail</p>
+    }
+
     <div class="meta">
         <span class="badge">#@Model.Id</span>
         <span class="status">@Model.Status</span>

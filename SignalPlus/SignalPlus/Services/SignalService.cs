@@ -70,7 +70,11 @@
                 LocationAddress = model.Address,
                 Latitude = 0, // TODO: Add from map or geolocation if available
                 Longitude = 0, // TODO: Same as above
-                User = user
+                User = user,
+                SenderName = model.SenderName,
+                SenderPhone = model.SenderPhone,
+                SenderEmail = model.SenderEmail,
+                IsNameVisible = model.IsNameVisible,
             };
 
             if (user != null)

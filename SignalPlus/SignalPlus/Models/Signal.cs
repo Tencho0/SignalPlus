@@ -39,5 +39,16 @@
         public virtual User? User { get; set; }
 
         public virtual ICollection<SignalImage> Images { get; set; } = new List<SignalImage>();
+
+        [Required]
+        public string SenderName { get; set; }
+
+        [Required]
+        public string SenderPhone { get; set; }
+
+        [Required]
+        public string SenderEmail { get; set; }
+
+        public bool IsNameVisible { get; set; } = false;
     }
 }

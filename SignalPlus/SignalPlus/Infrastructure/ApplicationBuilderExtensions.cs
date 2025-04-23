@@ -74,7 +74,11 @@
                     Latitude = 42.6977M,
                     Longitude = 23.3242M,
                     CreatedAt = DateTime.UtcNow,
-                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff"
+                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff",
+
+                    SenderName = "Ivan petkov",
+                    SenderPhone = "08976326270",
+                    SenderEmail = "vankata69@gmail.com"
                 };
 
                 var signal2 = new Signal
@@ -87,7 +91,11 @@
                     Latitude = 42.6937M,
                     Longitude = 23.3199M,
                     CreatedAt = DateTime.UtcNow,
-                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff"
+                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff",
+
+                    SenderName = "Ivan petkov",
+                    SenderPhone = "08976326270",
+                    SenderEmail = "vankata69@gmail.com"
                 };
 
                 var signal3 = new Signal
@@ -100,7 +108,11 @@
                     Latitude = 42.6965M,
                     Longitude = 23.3350M,
                     CreatedAt = DateTime.UtcNow,
-                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff"
+                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff",
+
+                    SenderName = "Ivan petkov",
+                    SenderPhone = "08976326270",
+                    SenderEmail = "vankata69@gmail.com"
                 };
 
                 var signal4 = new Signal
@@ -114,6 +126,10 @@
                     Longitude = 23.3274M,
                     CreatedAt = DateTime.UtcNow,
                     UserId = "b11f4443-0e58-4bc1-8c91-0d18e12b7f02",
+
+                    SenderName = "Ivan petkov",
+                    SenderPhone = "08976326270",
+                    SenderEmail = "vankata69@gmail.com"
                 };
 
                 var signal5 = new Signal
@@ -126,7 +142,11 @@
                     Latitude = 42.6758M,
                     Longitude = 23.3190M,
                     CreatedAt = DateTime.UtcNow,
-                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff"
+                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff",
+
+                    SenderName = "Ivan petkov",
+                    SenderPhone = "08976326270",
+                    SenderEmail = "vankata69@gmail.com"
                 };
 
                 var signal6 = new Signal
@@ -140,6 +160,10 @@
                     Longitude = 23.3092M,
                     CreatedAt = DateTime.UtcNow,
                     UserId = "b11f4443-0e58-4bc1-8c91-0d18e12b7f02",
+
+                    SenderName = "Ivan petkov",
+                    SenderPhone = "08976326270",
+                    SenderEmail = "vankata69@gmail.com"
                 };
 
                 var signal7 = new Signal
@@ -152,7 +176,11 @@
                     Latitude = 42.6980M,
                     Longitude = 23.3421M,
                     CreatedAt = DateTime.UtcNow,
-                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff"
+                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff",
+
+                    SenderName = "Ivan petkov",
+                    SenderPhone = "08976326270",
+                    SenderEmail = "vankata69@gmail.com"
                 };
 
                 var signal8 = new Signal
@@ -165,7 +193,11 @@
                     Latitude = 42.7012M,
                     Longitude = 23.3133M,
                     CreatedAt = DateTime.UtcNow,
-                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff"
+                    UserId = "eceed62a-8a49-422d-9417-0a7008ea95ff",
+
+                    SenderName = "Ivan petkov",
+                    SenderPhone = "08976326270",
+                    SenderEmail = "vankata69@gmail.com"
                 };
 
                 // Add signals to the database
