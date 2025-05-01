@@ -1,0 +1,281 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Сигнал+ | Община Якоруда</title>
+  @*   <link rel="stylesheet" href="style.css"> *@
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+  }
+  
+ 
+  .overlay {
+    width: 100%;
+    min-height: 100vh;
+    background-image: 
+      url('1000017250.jpg');
+    background-position: center center, center center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: cover, cover;
+    background-blend-mode: overlay;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    color: white;
+  }
+  
+ 
+  .signal-header h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  
+  .signal-button {
+    background-color: yellow;
+    color: #000;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+  }
+
+  .bell-icon {
+    width: 40px;
+    height: auto;
+  }
+  
+  .small-bell-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px; 
+    vertical-align: middle;
+  }
+  
+  
+  .signal-desc {
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .stats {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .stats-box {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px 30px;
+    border-radius: 10px;
+  }
+  
+  .stats-box h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .stats-box p {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .background-overlay {
+    width: 100%;
+    min-height: 100vh;
+    background: url('1000017249.jpg') center center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    color: #fff;
+  }
+  
+  
+  .left-content {
+    max-width: 800px;
+    text-align: center;
+  }
+  
+  .highlight {
+    font-size: 24px;
+    color: #FFD700;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .subtitle {
+    font-size: 18px;
+    margin: 20px 0;
+  }
+  
+  .advantages-section {
+    display: flex;
+    justify-content: space-between; /* Разпределя равномерно елементите */
+    align-items: flex-start; /* Подравнява горната част */
+    gap: 20px; /* Разстояние между блоковете */
+    flex-wrap: wrap; /* Ако няма място, да се пренасят */
+  }
+  
+  .advantage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1; /* Всички са еднакви по ширина */
+  }
+  
+  .icon-top, .icon-left {
+    width: 60px;
+    margin-bottom: 10px;
+  }
+  
+  .text-center, .text-left {
+    font-size: 16px;
+  }
+  
+
+  .buttons {
+    margin-top: 30px;
+  }
+  
+  .yellow-button {
+    background-color: #f9c600;
+    border: none;
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .yellow-button:hover {
+    background-color: #d4a700;
+  }
+
+  .button-below {
+    margin-top: 10px; 
+  }
+  
+  .button-below .yellow-button {
+    padding: 10px 20px;
+  }
+
+  .last {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    gap: 10px;
+  }
+  
+</style>
+</head>
+<body>
+
+    <div class="overlay">
+        <div class="signal-header">
+            <h1>Сигнал+</h1>
+        </div>
+
+        <button class="signal-button">
+            <img src="~/Images/bell.png.webp" alt="Камбанка" class="small-bell-icon">
+            ПОДАЙ СИГНАЛ
+        </button>
+
+        <p class="signal-desc">
+            СИСТЕМА ЗА ПОДАВАНЕ НА СИГНАЛИ ЗА НЕРЕДНОСТИ НА ОБЩИНА ЯКОРУДА<br>
+            Заедно правим община Якоруда по-добро място за живот!
+        </p>
+
+        <div class="stats">
+            <div class="stats-box">
+                <h2>
+                    <img src="~/Images/bell.png.webp" alt="Камбанка" class="small-bell-icon">
+                    Общо регистрирани
+                </h2>
+                <p>251</p>
+            </div>
+            <div class="stats-box">
+                <h2>
+                    <img src="~/Images/bell.png.webp" alt="Камбанка" class="small-bell-icon">
+                    От тях приключени
+                </h2>
+                <p>178</p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="background-overlay">
+        <div class="left-content">
+            <p class="highlight">Бъдете активни!</p>
+            <h1>Искате да подадете сигнал за нередност?</h1>
+            <p class="subtitle">
+                <strong>НАПРАВЕТЕ ГО СЕГА!</strong><br>
+                Подаването на сигнал е по-лесно от всякога. Изцяло онлайн, без чакане и без попълване на документи.
+            </p>
+
+            <section class="advantages-section">
+                <p class="highlight">ПРЕДИМСТВАТА СА:</p>
+
+                <section class="advantages-section">
+                    <div class="advantage">
+                        <img src="1-removebg-preview.png" alt="Лесно подаване" class="icon-top">
+                        <p class="text-center">Лесно подаване на сигнал</p>
+                    </div>
+
+                    <div class="advantage">
+                        <img src="2-removebg-preview.png" alt="Обратна връзка" class="icon-top">
+                        <p class="text-center">Активна обратна връзка</p>
+                    </div>
+
+                    <div class="advantage">
+                        <img src="3-removebg-preview (1).png" alt="Следене" class="icon-top">
+                        <p class="text-center">Следене на процеса</p>
+                    </div>
+
+                    <div class="advantage last">
+                        <img src="bell.png.webp" alt="Подай сигнал" class="icon-left">
+                        <p class="text-left">Подай сигнал</p>
+
+                        <br>
+                        <br>
+
+                        <div class="button-below">
+                            <button class="yellow-button">ПРОДЪЛЖИ</button>
+                        </div>
+                    </div>
+                </section>
+
+
+                <div class="buttons">
+                    <button class="yellow-button">ПОДАЙ СИГНАЛ</button>
+                </div>
+
+        </div>
+
+</body>
+</html>
