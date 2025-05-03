@@ -1,0 +1,157 @@
+﻿@model SignalPlus.DTOs.HomePageDTO
+
+<section class="hero-section full-width-section">
+    <div class="hero-content content-wrapper text-center">
+        <h1>Сигнал+</h1>
+        <a href="/newSignal" class="btn hero-btn">
+            <img src="~/Images/COLOURBOX40672772.webp" alt="Bell icon" class="hero-btn-icon" />
+            Подай сигнал
+        </a>
+        <p class="hero-subtitle">
+            СИСТЕМА ЗА ПОДАВАНЕ НА СИГНАЛИ ЗА НЕРЕДНОСТИ<br />
+            НА ОБЩИНА ЯКОРУДА
+        </p>
+        <p class="hero-description">
+            Заедно правим община Якоруда<br />
+            по-добро място за живот!
+        </p>
+        <div class="hero-stats">
+            <a href="/allsignals" class="stat-box">
+                <div class="stat-icon">
+                    <img src="~/Images/COLOURBOX40672772.webp" alt="Bell icon" />
+                </div>
+                <div class="stat-info">
+                    <div class="stat-label">Общо<br />регистрирани</div>
+                    <div class="stat-value">@Model.TotalSignals</div>
+                </div>
+            </a>
+
+            <a href="/allsignals?searchQuery=&status=Приключен" class="stat-box">
+                <div class="stat-icon">
+                    <img src="~/Images/COLOURBOX40672772.webp" alt="Bell icon" />
+                </div>
+                <div class="stat-info">
+                    <div class="stat-label">От тях<br />приключени</div>
+                    <div class="stat-value">@Model.CompletedSignals</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hero-section {
+        position: relative;
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('@Url.Content("~/Images/1000017250.jpg")') center/cover no-repeat;
+        color: #fff;
+        text-align: center;
+        padding: clamp(1rem, 6vw, 4rem) 1rem;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        width: 90%;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero-section h1 {
+        /* font scales from 2rem up to 4rem */
+        font-size: clamp(2rem, 8vw, 4rem);
+        margin-bottom: 1rem;
+        line-height: 1.1;
+    }
+
+    .hero-btn {
+        display: inline-flex;
+        align-items: center;
+        background-color: #ffd400;
+        color: #061941;
+        font-weight: bold;
+        /* padding and font scale with viewport */
+        padding: clamp(0.5rem, 1vw, 1rem) clamp(1rem, 2vw, 2rem);
+        font-size: clamp(0.9rem, 2vw, 1.2rem);
+        border-radius: 50px;
+        text-decoration: none;
+        margin-bottom: 1.5rem;
+        transition: background-color 0.3s;
+    }
+
+        .hero-btn:hover {
+            background-color: #e6b800;
+        }
+
+    .hero-btn-icon {
+        width: 1.5em;
+        height: 1.5em;
+        margin-right: 0.5em;
+    }
+
+    .hero-subtitle {
+        text-transform: uppercase;
+        font-size: clamp(1rem, 2vw, 1.4rem);
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-description {
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        margin-bottom: 2rem;
+    }
+
+    .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+    }
+
+    /* Each box is now a link */
+    .stat-box {
+        display: flex;
+        align-items: center;
+        border: 2px solid #fff;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+        color: #fff;
+        transition: background-color 0.2s, transform 0.2s;
+    }
+
+        .stat-box:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+    .stat-icon {
+        flex-shrink: 0;
+        margin-right: 0.75rem;
+    }
+
+        .stat-icon img {
+            width: 2rem;
+            height: 2rem;
+            filter: invert(1);
+        }
+
+    .stat-info {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1;
+    }
+</style>
