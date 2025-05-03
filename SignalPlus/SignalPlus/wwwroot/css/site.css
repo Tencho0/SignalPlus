@@ -175,13 +175,29 @@ h1 {
     font-size: 16px;
     font-weight: bold;
     border: 1px solid #ddd;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
 }
+
+    .faq-item:hover {
+        background: #e0e0e0;
+    }
 
     .faq-item i {
         color: #d4ad70;
         font-size: 18px;
-        font-weight: bold;
+        transition: transform 0.3s ease-in-out;
     }
+
+.faq-answer {
+    display: none;
+    padding: 10px;
+    border-left: 4px solid #d4ad70;
+    background: #f9f9f9;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border-radius: 0 0 8px 8px;
+}
 
 /* === CONTACT PAGE === */
 .contact-section {

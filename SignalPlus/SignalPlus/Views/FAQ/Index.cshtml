@@ -1,107 +1,29 @@
-﻿<!DOCTYPE html>
+﻿@model List<SignalPlus.FaqItem>
+
+<!DOCTYPE html>
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Често задавани въпроси</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-    <style>
-        .faq-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f5f5f5;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            border: 1px solid #ddd;
-            cursor: pointer;
-            transition: background 0.3s ease-in-out;
-        }
-
-        .faq-item:hover {
-            background: #e0e0e0;
-        }
-
-        .faq-item i {
-            color: #d4ad70;
-            font-size: 18px;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .faq-answer {
-            display: none;
-            padding: 10px;
-            border-left: 4px solid #d4ad70;
-            background: #f9f9f9;
-            margin-bottom: 10px;
-            font-size: 14px;
-            border-radius: 0 0 8px 8px;
-        }
-    </style>
-
 </head>
 <body>
     <div class="container">
         <div class="breadcrumbs">
             <a href="#">НАЧАЛО</a> / <a href="#">ЧЕСТО ЗАДАВАНИ ВЪПРОСИ</a>
         </div>
-        
+
         <h1>ЧЕСТО ЗАДАВАНИ ВЪПРОСИ</h1>
 
         <div class="faq-list">
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <span>1. Как работи системата за сигнали “Сигнал+” на Община Якоруда?</span>
-                <i class="fa-solid fa-plus"></i>
-            </div>
-            <div class="faq-answer">
-                Системата “Сигнал+” позволява на гражданите да подават сигнали за нередности в общината чрез уеб платформата.
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <span>2. Как мога да подам сигнал?</span>
-                <i class="fa-solid fa-plus"></i>
-            </div>
-            <div class="faq-answer">
-                За да подадете сигнал, натиснете бутона “Подай сигнал”, попълнете необходимите данни и изпратете формуляра.
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <span>3. Кой може да подава сигнали, въпроси и предложения?</span>
-                <i class="fa-solid fa-plus"></i>
-            </div>
-            <div class="faq-answer">
-                Всеки гражданин, независимо дали е жител на общината или не, може да подаде сигнал.
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <span>4. Кой отговаря за решаването на сигналите?</span>
-                <i class="fa-solid fa-plus"></i>
-            </div>
-            <div class="faq-answer">
-                Община Якоруда отговаря за проверката и предприемането на мерки по подадените сигнали.
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <span>5. Мога ли да подам сигнал за нередност, ако не съм жител на общината?</span>
-                <i class="fa-solid fa-plus"></i>
-            </div>
-            <div class="faq-answer">
-                Да, системата приема сигнали от всички граждани, независимо от местожителството им.
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <span>6. Колко време отнема да се извърши проверка на дадения сигнал?</span>
-                <i class="fa-solid fa-plus"></i>
-            </div>
-            <div class="faq-answer">
-                Времето за проверка зависи от сложността на случая, но средно отнема между 3 и 7 работни дни.
-            </div>
+            @foreach (var item in Model)
+            {
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <span>@item.Question</span>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="faq-answer">@item.Answer</div>
+            }
         </div>
     </div>
 
