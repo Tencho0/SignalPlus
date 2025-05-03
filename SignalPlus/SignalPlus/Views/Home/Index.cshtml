@@ -1,49 +1,219 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@section FullWidthTop {
+    <style>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p>Authenticated: @User.Identity.IsAuthenticated</p>
 
-    <h3>Claims</h3>
-    <ul>
-        @foreach (var claim in User.Claims)
-        { 
-            <li>@claim.Type: @claim.Value</li>
+        /* === HOME PAGE: ABOUT INFO SECTION === */
+        .about-info {
+            padding: 60px 100px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('@Url.Content("~/Images/sec2.jpg")') no-repeat center center;
+            background-size: cover;
+            color: white;
         }
-    </ul>
 
+            .about-info .section-subtitle {
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                color: #FFD700;
+            }
 
-    @if (User.IsInRole(Constants.AdministratorRoleName))
-    {
-        <p>You are an Admin ✅</p>
-    }
-    else
-    {
-        <p>You are NOT in the Admin role ❌</p>
-    }
+            .about-info .section-title {
+                font-size: 32px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                color: white;
+            }
 
-    <ul>
-        @if (!User.Identity.IsAuthenticated)
-        {
-            <li>
-                <a asp-controller="User" asp-action="Login">Login</a>
-            </li>
-            <li>
-                <a asp-controller="User" asp-action="Register">Register</a>
-            </li>
+            .about-info .section-description {
+                font-size: 18px;
+                line-height: 1.6;
+                color: #fff;
+            }
+
+            .about-info .medum-title-yellow {
+                font-size: 20px;
+                font-weight: bold;
+                color: #FFD700;
+                margin-top: 30px;
+                margin-bottom: 10px;
+            }
+
+        /* === ADVANTAGE ITEMS === */
+        .advantages {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 30px;
         }
-        else
-        {
-            <li>
-                <a href="#">Hello, @User.Identity.Name</a>
-            </li>
 
-            <li>
-                <a asp-controller="User" asp-action="Logout">Logout</a>
-            </li>
+        .advantage-item {
+            flex: 1 1 30%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: transparent;
+            padding: 20px 10px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            color: white;
         }
-    </ul>
-</div>
+
+            .advantage-item:hover {
+                transform: translateY(-4px);
+            }
+
+        .advantage-icon {
+            margin-bottom: 10px;
+        }
+
+            .advantage-icon img {
+                width: 64px;
+                height: 64px;
+                filter: invert(1) brightness(2);
+            }
+
+        .advantage-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* === ACTION BUTTON BELOW ADVANTAGES === */
+        .about-info .btn-primary {
+            background-color: #ffd400;
+            color: #061941;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+            .about-info .btn-primary:hover {
+                background-color: #e6b800;
+            }
+
+        /* === RIGHT-SIDE CTA BUTTON === */
+        .about-info-button-item {
+            background-color: #f7faf7;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .about-info-button-item:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+            }
+
+        .about-info-button-icon {
+            margin-right: 20px;
+        }
+
+        .about-info-button-content h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #000;
+        }
+
+        .about-info-button-content p {
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .about-info-button-content .btn {
+            padding: 8px 16px;
+            font-size: 14px;
+            background-color: #ffd400;
+            color: black;
+            border-radius: 20px;
+            font-weight: bold;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+            .about-info-button-content .btn:hover {
+                background-color: #e6b800;
+            }
+
+    </style>
+
+    <section class="about-info full-width-section">
+        <div class="about-info-wrapper content-wrapper">
+            <div class="section-subtitle gold">
+                БЪДЕТЕ АКТИВНИ
+            </div>
+            <h2 class="section-title white">
+                Искате да подадете сигнал за нередност?
+            </h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-info-wrapper">
+                        <div class="section-description white mt-4 mb-4">
+                            <b>Направете го сега.<br></b><br>
+                            Подаването на сигнал е по-лесно от всякога. Изцяло онлайн, без чакане и без попълване на документи.
+                        </div>
+                        <div class="medum-title-yellow">
+                            ПРЕДИМСТВАТА СА:
+                        </div>
+                        <div class="advantages">
+                            <div class="advantage-item animated">
+                                <div class="advantage-icon">
+                                    <!-- Icon: Message Forward -->
+                                    <img src="~/Images/message-text-circle-01-svgrepo-com.svg" alt="Лесно подаване на сигнал" width="64" height="64">
+                                </div>
+                                <div class="advantage-text">Лесно подаване на сигнал</div>
+                            </div>
+                            <div class="advantage-item animated">
+                                <div class="advantage-icon">
+                                    <!-- Icon: Tooltip -->
+                                    <img src="~/Images/feedback-svgrepo-com.svg" alt="Активна обратна връзка" width="64" height="64">
+                                </div>
+                                <div class="advantage-text">Активна обратна връзка</div>
+                            </div>
+                            <div class="advantage-item animated">
+                                <div class="advantage-icon">
+                                    <!-- Icon: Progress Check -->
+                                    <img src="~/Images/ok-circle-svgrepo-com.svg" alt="Следене на прогреса" width="64" height="64">
+                                </div>
+                                <div class="advantage-text">Следене на прогреса</div>
+                            </div>
+                        </div>
+                        <a href="/about" class="btn btn-primary">Научи повече за системата</a>
+                    </div>
+                </div>
+                <div class="about-info-buttons-wrapper col-lg-5">
+                    <a href="/newSignal" class="about-info-button-item animated">
+                        <div class="about-info-button-icon">
+                            <!-- Icon: Bell Ringing -->
+                            <img src="~/Images/COLOURBOX40672772.webp" alt="Подайте сигнал" width="64" height="64">
+                        </div>
+                        <div class="about-info-button-content">
+                            <h3>Подайте сигнал</h3>
+                            <p>Заедно правим община Якоруда по-добро място за живот!</p>
+                            <span class="btn btn-primary">Продължи</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
