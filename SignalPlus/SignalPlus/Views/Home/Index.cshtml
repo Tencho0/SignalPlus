@@ -6,5 +6,6 @@
 @section FullWidthTop {
     @await Html.PartialAsync("heroSection.cshtml", Model)
     @await Html.PartialAsync("callToActionSection.cshtml")
+    @await Html.PartialAsync("faqSection.cshtml", Model.faq)
 
 }

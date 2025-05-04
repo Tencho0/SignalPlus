@@ -22,11 +22,16 @@ namespace SignalPlus.Controllers
         {
             var total = await _signalService.GetTotalSignalsCountAsync();
             var completed = await _signalService.GetCompletedSignalsCountAsync();
-            
+
+            var faq = FaqConstants.All
+                              .Take(3)
+                              .ToList();
+
             var homePageDTO = new HomePageDTO
             {
                 TotalSignals = total,
-                CompletedSignals = completed
+                CompletedSignals = completed,
+                faq = faq,
             };
 
             return View(homePageDTO);

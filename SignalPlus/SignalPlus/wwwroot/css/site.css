@@ -199,6 +199,93 @@ h1 {
     border-radius: 0 0 8px 8px;
 }
 
+
+.faq-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-top: 1.5rem;
+}
+
+.faq-header-image img {
+    width: 125px;
+    display: block;
+}
+
+.faq-header-content h2 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.faq-header-content .faq-subtitle {
+    margin: 0.25rem 0 0.75rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #333;
+}
+
+.faq-header-content h3 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    /* Stack logo + text */
+    .faq-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .faq-header-image img {
+        width: 100px; /* a bit smaller on mobile */
+        margin-bottom: 1rem; /* space below the logo */
+    }
+
+    .faq-header-content h2 {
+        font-size: 2rem;
+        line-height: 1.1;
+    }
+
+    .faq-header-content .faq-subtitle {
+        font-size: 0.9rem;
+        margin: 0.25rem 0 1rem;
+    }
+
+    .faq-header-content h3 {
+        font-size: 1.5rem;
+    }
+    /* Tighter container padding */
+    .container {
+        padding: 10px;
+    }
+    /* Full-width FAQ cards and more breathing room */
+    .faq-list {
+        margin-top: 1.5rem;
+    }
+
+    .faq-item, .faq-answer {
+        border-radius: 8px;
+        margin: 0 0 8px; /* remove side margins, just bottom */
+    }
+
+    .faq-item {
+        padding: 12px 10px;
+        font-size: 14px;
+    }
+
+    .faq-answer {
+        padding: 10px;
+        font-size: 13px;
+    }
+}
+
+
+
 /* === CONTACT PAGE === */
 .contact-section {
     text-align: center;

@@ -1,0 +1,44 @@
+﻿@model List<SignalPlus.FaqItem>
+
+<section class="faq-section">
+    <div class="container">
+        <div class="faq-header">
+            <div class="faq-header-image">
+                <img src="~/Images/якорудалого.jpg" alt="Якоруда лого" />
+            </div>
+            <div class="faq-header-content">
+                <h2>Сигнал+</h2>
+                <p class="faq-subtitle">Системата за сигнали на община Якоруда</p>
+                <h3>Често задавани въпроси</h3>
+            </div>
+        </div>
+
+        <div class="faq-list">
+            @foreach (var item in Model)
+            {
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <span>@item.Question</span>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="faq-answer">@item.Answer</div>
+            }
+        </div>
+    </div>
+</section>
+
+<script>
+    function toggleFAQ(element) {
+        var answer = element.nextElementSibling;
+        var icon = element.querySelector("i");
+
+        if (answer.style.display === "block") {
+            answer.style.display = "none";
+            icon.classList.remove("fa-minus");
+            icon.classList.add("fa-plus");
+        } else {
+            answer.style.display = "block";
+            icon.classList.remove("fa-plus");
+            icon.classList.add("fa-minus");
+        }
+    }
+</script>
