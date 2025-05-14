@@ -68,8 +68,8 @@
                 Status = Status.Регистриран,
                 CreatedAt = DateTime.UtcNow,
                 LocationAddress = model.Address,
-                Latitude = 0, // TODO: Add from map or geolocation if available
-                Longitude = 0, // TODO: Same as above
+                Latitude = model.Latitude ?? 0,
+                Longitude = model.Longitude ?? 0,
                 User = user,
                 SenderName = model.SenderName,
                 SenderPhone = model.SenderPhone,

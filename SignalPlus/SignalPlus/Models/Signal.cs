@@ -26,8 +26,10 @@
         [Required]
         public string LocationAddress { get; set; }
 
+        [Column(TypeName = "decimal(9,6)")]
         public decimal Latitude { get; set; }
 
+        [Column(TypeName = "decimal(9,6)")]
         public decimal Longitude { get; set; }
 
         // null = pending, true = accepted, false = declined

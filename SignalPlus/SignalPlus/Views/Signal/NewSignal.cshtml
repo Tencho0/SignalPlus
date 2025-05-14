@@ -1,6 +1,64 @@
 ﻿@model SignalPlus.DTOs.Signal.NewSignalDTO
 
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleMapsApiKey&callback=initMap&libraries=places" async defer></script>
+
+<script>
+    let map, marker, geocoder;
+
+    function initMap() {
+        const defaultLocation = { lat: 42.0175, lng: 23.0975 }; // Blagoevgrad center
+
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: defaultLocation,
+            zoom: 14,
+        });
+
+        marker = new google.maps.Marker({
+            map,
+            position: defaultLocation,
+            draggable: true
+        });
+
+        geocoder = new google.maps.Geocoder();
+
+        // Set initial values
+        updateLatLngInputs(defaultLocation.lat, defaultLocation.lng);
+
+        // On click or drag, update location
+        map.addListener("click", (e) => {
+            placeMarker(e.latLng);
+        });
+
+        marker.addListener("dragend", () => {
+            placeMarker(marker.getPosition());
+        });
+    }
+
+    function placeMarker(latLng) {
+        marker.setPosition(latLng);
+        map.panTo(latLng);
+        updateLatLngInputs(latLng.lat(), latLng.lng());
+        reverseGeocode(latLng.lat(), latLng.lng());
+    }
+
+    function updateLatLngInputs(lat, lng) {
+        document.getElementById("Latitude").value = lat;
+        document.getElementById("Longitude").value = lng;
+    }
+
+    function reverseGeocode(lat, lng) {
+        geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+            if (status === "OK" && results[0]) {
+                document.querySelector('input[name="Address"]').value = results[0].formatted_address;
+            } else {
+                console.error("Geocoder failed: " + status);
+            }
+        });
+    }
+</script>
+
+
 <style>
     .signal-form {
         max-width: 600px;
@@ -70,6 +128,10 @@
     <label>1. Адрес или локация от картата:</label>
     <input asp-for="Address" class="form-control" placeholder="Въведете адрес" />
     <span asp-validation-for="Address" class="text-danger"></span>
+
+    <div id="map" style="height: 400px; margin-top: 1rem; border-radius: 8px;"></div>
+    <input type="hidden" name="Latitude" id="Latitude" />
+    <input type="hidden" name="Longitude" id="Longitude" />
 
     <label>2. Категория:</label>
     <select asp-for="Category" class="form-control">

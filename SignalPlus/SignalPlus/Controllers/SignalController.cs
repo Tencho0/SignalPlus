@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
     using SignalPlus.DTOs.Signal;
     using SignalPlus.Models;
     using SignalPlus.Models.Enums;
@@ -13,11 +14,16 @@
     {
         private readonly ISignalService _signalService;
         private readonly IUserService _userService;
+        private readonly IConfiguration _configuration;
 
-        public SignalController(ISignalService signalService, IUserService userService)
+        public SignalController(
+            ISignalService signalService,
+            IUserService userService,
+            IConfiguration configuration)
         {
             _signalService = signalService;
             _userService = userService;
+            _configuration = configuration;
         }
 
         // Show all signals
@@ -73,6 +79,8 @@
         [HttpGet("/newSignal")]
         public IActionResult NewSignal()
         {
+            var apiKey = _configuration["GoogleMaps:ApiKey"];
+            ViewBag.GoogleMapsApiKey = apiKey;
             return View();
         }
 

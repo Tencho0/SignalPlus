@@ -42,6 +42,9 @@
 
         [Display(Name = "Качи снимки")]
         public List<IFormFile> Images { get; set; } = new();
-    }
 
+        public decimal? Latitude { get; set; }
+
+        public decimal? Longitude { get; set; }
+    }
 }
