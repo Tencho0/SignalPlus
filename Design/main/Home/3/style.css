@@ -1,0 +1,137 @@
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.background-overlay {
+  background-image: url('1000017249.jpg'); /* ← тук сложи правилния файл */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 60px;
+  box-sizing: border-box;
+}
+
+.left-content {
+  max-width: 600px;
+  color: white;
+}
+
+.highlight {
+  color: #FFD700;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-size: 36px;
+}
+
+.subtitle {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.yellow-button {
+  background-color: yellow;
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.second-button {
+  background-color: yellow;
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.advantages {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 30px;
+  font-size: 16px;
+}
+
+.advantages li {
+  margin-bottom: 10px;
+  color: black; /* както е на снимката */
+  background-color: rgba(255, 255, 255, 0.8); /* бяло полупрозрачно подчертаване */
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+}
+
+.emoji {
+  font-size: 20px;
+}
+.advantages-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  margin: 40px auto;
+  max-width: 1000px;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.advantage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-align: center;
+  width: 23%;
+  box-sizing: border-box;
+}
+
+.last {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+}
+
+.icon-top {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.icon-left {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+}
+
+.text-center {
+  font-size: 16px;
+}
+
+.text-left {
+  font-size: 18px;
+}

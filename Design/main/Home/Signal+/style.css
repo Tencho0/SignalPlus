@@ -1,0 +1,123 @@
+/* фон */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('1000017250.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: #fff;
+  }
+  
+
+  .overlay {
+    background: rgba(0, 0, 0, 0.6);
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .signal-header {
+    max-width: 1000px;
+    margin: auto;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  
+  .signal-header h1 {
+    font-size: 64px;
+    margin: 0 0 20px;
+    color: #fff;
+  }
+  
+  .signal-button {
+    background: #ffd700;
+    color: #000;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .signal-desc {
+    margin-top: 15px;
+    line-height: 1.5;
+    font-size: 16px;
+    color: #fff;
+  }
+  
+  .icon-bell-img {
+    width: 20px;        /* може да промениш според нуждите */
+    height: 20px;
+    object-fit: contain;
+  }
+  .hero-desc {
+    margin-top: 15px;
+    line-height: 1.5;
+    font-size: 16px;
+    color: #fff;
+  }
+  
+  /* статистики */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  .stats-box {
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 20px 30px;
+    width: 180px;
+    color: #fff;
+  }
+  .stats-box h2 {
+    margin: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  .stats-box p {
+    margin: 8px 0 0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* секция с картите */
+  .section {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #fff;
+    color: #000;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  .section h2 {
+    text-align: center;
+    margin-top: 0;
+  }
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+  }
+  .card {
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 280px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .center { text-align: center; }
+  
+  @media(max-width: 768px) {
+    .cards { flex-direction: column; }
+    .stats { flex-direction: column; gap: 20px; }
+  }
+  /* черна камбанка в бутона */
+
+
+  
