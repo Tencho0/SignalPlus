@@ -1,0 +1,119 @@
+﻿@model IEnumerable<SignalPlus.Models.Signal>
+@using SignalPlus.Models.Enums;
+
+<h1>СТАТИСТИКИ</h1>
+
+<h3>Обща информация</h3>
+
+<div class="signal-stats-row">
+    <div class="stat-box">
+        <i class="fa-solid fa-bell"></i>
+        <div class="stat-label">ОБЩО ПОДАДЕНИ</div>
+        <div class="stat-value">@Model.Count()</div>
+    </div>
+    <div class="stat-box">
+        <i class="fa-solid fa-thumbs-up"></i>
+        <div class="stat-label">ОДОБРЕНИ</div>
+        <div class="stat-value">@Model.Count(x => x.IsApproved == true)</div>
+    </div>
+    <div class="stat-box">
+        <i class="fa-solid fa-xmark"></i>
+        <div class="stat-label">ОТХВЪРЛЕНИ</div>
+        <div class="stat-value">@Model.Count(x => x.IsApproved == false)</div>
+    </div>
+    <div class="stat-box">
+        <i class="fa-solid fa-check-circle"></i>
+        <div class="stat-label">ПРИКЛЮЧЕНИ</div>
+        <div class="stat-value">@Model.Count(s => s.Status == Status.Приключен)</div>
+    </div>
+</div>
+
+<h3 style="margin-top: 40px;">Текущи за обработка</h3>
+
+<div class="signal-stats-row">
+    <div class="stat-box">
+        <i class="fa-solid fa-hourglass-start"></i>
+        <div class="stat-label">ЧАКАЩИ ОДОБРЕНИЕ</div>
+        <div class="stat-value">@Model.Count(s => s.IsApproved == null)</div>
+    </div>
+    <div class="stat-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <div class="stat-label">ЗА ПРОВЕРКА</div>
+        <div class="stat-value">@Model.Count(s => s.IsApproved == true && s.Status == Status.Регистриран)</div>
+    </div>
+    <div class="stat-box">
+        <i class="fa-solid fa-gears"></i>
+        <div class="stat-label">В ОБРАБОТКА</div>
+        <div class="stat-value">@Model.Count(s => s.Status == Status.ВОбработка)</div>
+    </div>
+</div>
+
+<style>
+    .signal-stats-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    .stat-box {
+        flex: 1 1 220px;
+        max-width: 300px;
+        background-color: #fffbea;
+        border: 2px solid #fcd900;
+        padding: 24px;
+        text-align: center;
+        font-weight: bold;
+        border-radius: 20px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+        transition: transform 0.2s ease;
+    }
+
+    .stat-box:hover {
+        transform: translateY(-5px);
+    }
+
+    .stat-box i {
+        font-size: 40px;
+        color: #fcd900;
+        margin-bottom: 10px;
+    }
+
+    .stat-label {
+        font-size: 16px;
+        color: #444;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .stat-value {
+        font-size: 32px;
+        color: #222;
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        font-size: 20px;
+        color: #333;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    @@media (max-width: 768px) {
+        .signal-stats-row {
+            flex-direction: column;
+            align-items: center;
+        }
+        .stat-box {
+            width: 90%;
+            max-width: none;
+        }
+    }
+</style>

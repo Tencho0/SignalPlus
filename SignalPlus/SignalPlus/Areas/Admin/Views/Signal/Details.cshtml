@@ -1,0 +1,211 @@
+﻿@model SignalPlus.Models.Signal
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Детайли за сигнал (Админ)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumbs">
+    <a href="@Url.Action("Index","Signal", new { area = "Admin" })">Админ</a> /
+    <span>@Model.Title</span>
+</div>
+
+<h1>Преглед на сигнал (Администратор)</h1>
+
+<div class="signal-details-container">
+    <h2><i class="fa-solid fa-circle-info"></i> @Model.Title</h2>
+
+    <div class="admin-actions">
+        @if (Model.IsApproved == null || Model.IsApproved == false)
+        {
+            <form asp-area="Admin" asp-controller="Signal" asp-action="Approve" asp-route-id="@Model.Id" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-success">
+                    ✅ Одобри
+                </button>
+            </form>
+        }
+
+        @if (Model.Status == SignalPlus.Models.Enums.Status.Регистриран && Model.IsApproved == true)
+        {
+            <form asp-controller="Signal" asp-area="Admin" asp-action="StartProcessing" method="post" style="display:inline;">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="btn btn-warning">
+                    <i class="fa-solid fa-play"></i> Започната проверка
+                </button>
+            </form>
+        }
+
+        @if (Model.Status == SignalPlus.Models.Enums.Status.ВОбработка)
+        {
+            <form asp-action="Complete" method="post" style="display:inline;">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="btn btn-complete">
+                    <i class="fa-solid fa-check-double"></i> Приключи
+                </button>
+            </form>
+        }
+
+        @if (Model.IsApproved != false)
+        {
+            <form asp-action="Decline" method="post" style="display:inline;">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="btn btn-danger">
+                    ❌ Отхвърли
+                </button>
+            </form>
+        }
+    </div>
+
+    <hr />
+
+    <p><strong>ID:</strong> @Model.Id</p>
+    <p><strong>Категория:</strong> @Model.Category</p>
+    <p><strong>Статус:</strong> @Model.Status</p>
+    <p><strong>Одобрен:</strong> @(Model.IsApproved == true ? "Да" : Model.IsApproved == false ? "Не" : "Неопределено")</p>
+    <p><strong>Създаден:</strong> @Model.CreatedAt.ToString("dd MMMM yyyy г., HH:mm ч.")</p>
+
+    <hr />
+
+    <p><strong>Адрес:</strong> @Model.LocationAddress</p>
+    <p><strong>Координати:</strong> @Model.Latitude, @Model.Longitude</p>
+
+    <p><strong>Описание:</strong><br /> @Model.Description</p>
+
+    <hr />
+
+    <h3>Подател</h3>
+    <p><strong>Име:</strong> @Model.SenderName</p>
+    <p><strong>Телефон:</strong> @Model.SenderPhone</p>
+    <p><strong>Имейл:</strong> @Model.SenderEmail</p>
+    <p><strong>Публично показване на име:</strong> @(Model.IsNameVisible ? "Да" : "Не")</p>
+
+    @if (Model.Images != null && Model.Images.Any())
+    {
+        <div class="signal-images">
+            <h3>Снимки</h3>
+            <div class="image-gallery">
+                @foreach (var img in Model.Images)
+                {
+                    <img src="@img.FilePath" alt="Снимка към сигнала" class="signal-image" style="max-width: 300px; margin: 0.5rem;" />
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .signal-details-container {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
+        font-family: "Segoe UI", sans-serif;
+        color: #333;
+        line-height: 1.6;
+    }
+
+        .signal-details-container h1,
+        .signal-details-container h2,
+        .signal-details-container h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .signal-details-container p {
+            margin-bottom: 0.6rem;
+        }
+
+        .signal-details-container strong {
+            color: #555;
+        }
+
+    .admin-actions {
+        margin: 1rem 0;
+    }
+
+        .admin-actions form {
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        .admin-actions button {
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .admin-actions .btn-success {
+            background-color: #27ae60;
+            color: white;
+        }
+
+            .admin-actions .btn-success:hover {
+                background-color: #219150;
+            }
+
+        .admin-actions .btn-danger {
+            background-color: #c0392b;
+            color: white;
+        }
+
+            .admin-actions .btn-danger:hover {
+                background-color: #a93226;
+            }
+
+        .admin-actions .btn-complete {
+            background-color: #6c5ce7; /* Indigo/Purple shade */
+            color: white;
+        }
+
+            .admin-actions .btn-complete:hover {
+                background-color: #5a4dcf;
+            }
+
+    .meta {
+        margin: 1rem 0;
+        padding: 0.8rem;
+        background-color: #f4f4f4;
+        border-left: 5px solid #2980b9;
+        border-radius: 6px;
+    }
+
+        .meta span {
+            display: inline-block;
+            margin-right: 1rem;
+            font-weight: 500;
+        }
+
+    .signal-images {
+        margin-top: 2rem;
+    }
+
+    .image-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .signal-image {
+        max-width: 300px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .breadcrumbs a,
+    .breadcrumb a {
+        text-decoration: none;
+        font-size: 14px;
+        color: #666;
+        font-weight: bold;
+    }
+
+    .breadcrumb span {
+        margin: 0 0.5rem;
+    }
+</style>

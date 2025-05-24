@@ -1078,3 +1078,39 @@ input[disabled] {
             padding: 4px 10px;
             border-radius: 6px;
         }
+
+
+
+
+
+
+.card-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.admin-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.approve {
+    background-color: #28a745;
+    color: white;
+}
+
+.reject {
+    background-color: #dc3545;
+    color: white;
+}
+
+.admin-btn:hover {
+    opacity: 0.85;
+}

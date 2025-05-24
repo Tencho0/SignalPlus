@@ -26,10 +26,17 @@
 
             <div class="menu" id="navbarMenu">
                 <a href="/">НАЧАЛО</a>
-                <a href="/allsignals">СИГНАЛИ</a>
-                <a href="/about">ЗА СИГНАЛ+</a>
-                <a href="/faq">ЧЗВ</a>
-                <a href="/contact">КОНТАКТИ</a>
+                @if (User.IsInRole(Constants.AdministratorRoleName))
+                {
+                    <a href="@Url.Action("Index", "Signal", new { area = "Admin" })">АДМИНИСТРАТОРСКИ ПАНЕЛ</a>
+                }
+                else
+                {
+                    <a href="/allsignals">СИГНАЛИ</a>
+                    <a href="/about">ЗА СИГНАЛ+</a>
+                    <a href="/faq">ЧЗВ</a>
+                    <a href="/contact">КОНТАКТИ</a>
+                }
                 @if (!User.Identity.IsAuthenticated)
                 {
                     <a href="/user/login">ВХОД/РЕГИСТРАЦИЯ</a>

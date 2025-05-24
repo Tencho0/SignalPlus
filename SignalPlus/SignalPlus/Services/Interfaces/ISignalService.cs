@@ -24,6 +24,8 @@
 
         Task<Signal> CreateSignalAsync(User? user, NewSignalDTO model, List<IFormFile> images);
 
+        Task SetStatusAsync(int signalId, Status newStatus);
+
         Task<bool> ApproveAsync(int id);
 
         Task<bool> DeclineAsync(int id);

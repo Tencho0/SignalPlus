@@ -128,6 +128,20 @@
             return signal;
         }
 
+        public async Task SetStatusAsync(int signalId, Status newStatus)
+        {
+            var signal = await this.GetByIdAsync(signalId);
+
+            if (signal == null)
+            {
+                throw new ArgumentException("Невалиден сигнал с ID: " + signalId);
+            }
+
+            signal.Status = newStatus;
+            await _context.SaveChangesAsync();
+        }
+
+
         public async Task<bool> ApproveAsync(int id)
         {
             var signal = await _context.Signals.FindAsync(id);

@@ -1,0 +1,8 @@
+﻿@model IEnumerable<SignalPlus.Models.Signal>
+@{
+    ViewBag.IsAdminView = true;
+    ViewBag.Section = "Completed";
+}
+
+<h1>Приключени Сигнали</h1>
+@Html.Partial("~/Areas/Admin/Views/Shared/_SignalCardList.cshtml", Model)

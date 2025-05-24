@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SignalPlus.Models.Signal>
+@{
+    var isAdmin = ViewBag.IsAdminView as bool? ?? false;
+    var section = ViewBag.Section as string;
+    var isForApprovalSection = section == "ForApproval";
+    var isApprovedSection = section == "Approved";
+    var isToBeStartedSection = section == "ToBeStarted";
+    var isInProgressSection = section == "InProgress";
+}
+
+@if (Model.Any())
+{
+    <div class="cards">
+        @foreach (var signal in Model)
+        {
+            <a href="@Url.Action("Details", "Signal", new { area = "Admin", id = signal.Id })" class="card-link">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-bus"></i> @signal.Title
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            <span class="badge">#@signal.Id</span>
+                            <span class="status-@(signal.Status == SignalPlus.Models.Enums.Status.Регистриран ? "registered" : "completed")">
+                                @signal.Status
+                            </span>
+
+                            @if (signal.IsApproved == true)
+                            {
+                                <span class="status-approved">Одобрен</span>
+                            }
+                            else if (signal.IsApproved == false)
+                            {
+                                <span class="status-declined">Отхвърлен</span>
+                            }
+                            else
+                            {
+                                <span class="status-pending">За одобрение</span>
+                            }
+                        </p>
+
+                        <p><i class="fa-solid fa-location-dot"></i> @signal.LocationAddress</p>
+                        <p><i class="fa-solid fa-circle-info"></i> @signal.Category</p>
+                        <p><i class="fa-regular fa-calendar"></i> @signal.CreatedAt.ToString("dd MMMM yyyy г., HH:mm ч.")</p>
+@* 
+                        @if (isAdmin && isForApprovalSection)
+                        {
+                            <div class="card-actions">
+                                <form asp-action="Approve" asp-route-id="@signal.Id" method="post" style="display:inline;">
+                                    <button type="submit" class="admin-btn approve">✅ Одобри</button>
+                                </form>
+                                <form asp-action="Reject" asp-route-id="@signal.Id" method="post" style="display:inline;">
+                                    <button type="submit" class="admin-btn reject">❌ Отхвърли</button>
+                                </form>
+                            </div>
+                        }
+                        else if (isAdmin && isToBeStartedSection)
+                        {
+                            <div class="card-actions">
+                                <form asp-action="StartProcessing" asp-route-id="@signal.Id" method="post" style="display:inline;">
+                                    <button type="submit" class="admin-btn start-progress">▶️ Започни проверка</button>
+                                </form>
+                            </div>
+                        }
+                        else if (isAdmin && isInProgressSection)
+                        {
+                            <div class="card-actions">
+                                <form asp-action="Complete" asp-controller="Signal" asp-area="Admin" asp-route-id="@signal.Id" method="post" style="display:inline;">
+                                    <button type="submit" class="admin-btn complete">✔️ Приключи</button>
+                                </form>
+                            </div>
+                        } *@
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+}
+else
+{
+    <p>Няма налични сигнали.</p>
+}

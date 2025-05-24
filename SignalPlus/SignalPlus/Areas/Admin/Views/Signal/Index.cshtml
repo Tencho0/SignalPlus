@@ -1,0 +1,119 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section FullWidthTop {
+
+    <div class="admin-panel">
+        <!-- Sidebar Menu -->
+        <div class="admin-sidebar">
+            <div class="admin-title">АДМИНИСТРАТОР</div>
+            <ul class="admin-menu">
+                <li><a href="#" class="load-section active" data-url="@Url.Action("Statistics", "Signal", new { area = "Admin" })">СТАТИСТИКА</a></li>
+                <li><a href="#" class="load-section" data-url="@Url.Action("ForApproval", "Signal", new { area = "Admin" })">ЗА ОДОБРЕНИЕ</a></li>
+                <li><a href="#" class="load-section" data-url="@Url.Action("ToBeStarted", "Signal", new { area = "Admin" })">ЗА ПРОВЕРКА</a></li>
+                <li><a href="#" class="load-section" data-url="@Url.Action("InProgress", "Signal", new { area = "Admin" })">В ОБРАБОТКА</a></li>
+                <li><a href="#" class="load-section" data-url="@Url.Action("Completed", "Signal", new { area = "Admin" })">ПРИКЛЮЧЕНИ</a></li>
+                <li><a href="#" class="load-section" data-url="@Url.Action("Rejected", "Signal", new { area = "Admin" })">ОТХВЪРЛЕНИ</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="admin-content" id="admin-content">
+            @Html.Partial("_Statistics")
+        </div>
+    </div>
+     
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const links = document.querySelectorAll(".load-section");
+
+            links.forEach(link => {
+                link.addEventListener("click", function (e) {
+                    e.preventDefault();
+
+                    // Remove 'active' from all links
+                    links.forEach(l => l.classList.remove("active"));
+                    this.classList.add("active");
+
+                    const url = this.getAttribute("data-url");
+                    const content = document.getElementById("admin-content");
+                    content.innerHTML = "<p>Зареждане...</p>";
+
+                    fetch(url)
+                        .then(res => {
+                            if (!res.ok) throw new Error("Грешка при зареждане на съдържание.");
+                            return res.text();
+                        })
+                        .then(html => {
+                            content.innerHTML = html;
+                        })
+                        .catch(err => {
+                            content.innerHTML = `<p class="text-danger">${err.message}</p>`;
+                        });
+                });
+            });
+        });
+    </script>
+
+    <style>
+        .admin-panel {
+            display: flex;
+            min-height: calc(100vh - 100px); /* subtract header/footer height if needed */
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .admin-sidebar {
+            width: 220px;
+            background: linear-gradient(to bottom, #fff4b3, #fff8d9);
+            border-right: 2px solid black;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .admin-title {
+            padding: 20px;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            border-bottom: 2px solid black;
+        }
+
+        .admin-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+            .admin-menu li {
+                border-bottom: 2px solid black;
+            }
+
+                .admin-menu li:last-child {
+                    border-bottom: none;
+                }
+
+            .admin-menu a {
+                display: block;
+                padding: 15px 20px;
+                text-decoration: none;
+                color: black;
+                font-weight: bold;
+                transition: background 0.2s ease;
+            }
+
+                .admin-menu a:hover {
+                    background-color: #fcd900;
+                }
+
+                .admin-menu a.active {
+                    background-color: #fcd900;
+                    border-left: 4px solid black;
+                }
+
+        .admin-content {
+            flex-grow: 1;
+            padding: 30px;
+            background-color: #f9f9f9;
+        }
+    </style>
+}
