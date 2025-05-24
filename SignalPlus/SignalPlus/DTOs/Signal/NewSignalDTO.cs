@@ -12,7 +12,7 @@
         public Category Category { get; set; }
 
         [Required(ErrorMessage = "Моля, въведете заглавие.")]
-        [StringLength(100, ErrorMessage = "Заглавието не може да надвишава 100 символа.")]
+        [StringLength(80, ErrorMessage = "Заглавието не може да надвишава 100 символа.")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Моля, въведете описание.")]
