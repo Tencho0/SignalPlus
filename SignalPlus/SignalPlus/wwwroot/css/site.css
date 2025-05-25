@@ -491,37 +491,81 @@ h1 {
         display: flex;
         justify-content: center;
     }
-
 @media (max-width: 600px) {
     .container {
         padding: 16px;
+        text-align: left;
+    }
+
+    .breadcrumbs {
+        font-size: 14px;
         text-align: center;
+    }
+
+    h1 {
+        font-size: 22px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        padding: 0 10px;
     }
 
     .main-content p,
     .main-content ul {
-        text-align: center;
-        padding: 0;
-        margin: 0 auto 16px auto;
+        text-align: left;
+        font-size: 15px;
+        margin-bottom: 16px;
     }
 
-        .main-content p.text-block {
-            text-align: center;
-            white-space: normal;
-        }
+    .main-content ul {
+        padding-left: 18px;
+    }
+
+    .statistics {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
     .stat-box {
-        display: block;
-        width: 100%;
-        margin: 16px auto;
+        width: 90%;
+        margin: 12px 0;
+        padding: 20px;
+        box-sizing: border-box;
     }
 
-    .cta button {
+    .cta h3 {
+        font-size: 20px;
+    }
+
+    .cta p {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+
+    .submit-signal-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffc107;
+        padding: 14px 24px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #000;
+        border-radius: 6px;
+        text-decoration: none;
         width: 100%;
         max-width: 300px;
         margin: 0 auto;
     }
+
+    .submit-signal-btn svg {
+        margin-right: 8px;
+    }
 }
+
 
 /* === FOOTER === */
 .yakoruda-footer {
