@@ -31,8 +31,8 @@
         public async Task<IActionResult> AllSignals(string searchQuery, Status? status, Category? category, int page = 1, int pageSize = 9)
         {
             var signals = await _signalService.GetAllSignalsAsync();
-            signals = signals.Where(x => x.IsApproved == true);
-            
+            signals = signals.Where(x => x.IsApproved == true).OrderByDescending(x => x.CreatedAt);
+
             // Apply filters if values are provided
             if (!string.IsNullOrEmpty(searchQuery))
             {
@@ -47,9 +47,9 @@
             if (category.HasValue)
             {
                 signals = signals.Where(s => s.Category == category.Value);
-            }  
-            
-             // Pagination
+            }
+
+            // Pagination
             var totalItems = signals.Count();
             var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
 
