@@ -149,6 +149,38 @@
             background-color: #e6b800;
         }
 
+
+    @@media (max-width: 768px) {
+    .about-info {
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .advantages {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .advantage-item {
+        flex: 1 1 100%;
+        max-width: 300px;
+    }
+
+    .about-info-buttons-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .about-info-button-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-info-button-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
 </style>
 
 <section class="about-info full-width-section">
@@ -160,7 +192,7 @@
             Искате да подадете сигнал за нередност?
         </h2>
         <div class="row align-items-center">
-            <div class="col-lg-6">
+            <div class="col-12 col-lg-6">
                 <div class="about-info-wrapper">
                     <div class="section-description white mt-4 mb-4">
                         <b>Направете го сега.<br></b><br>
@@ -195,7 +227,7 @@
                     <a href="/about" class="btn btn-primary">Научи повече за системата</a>
                 </div>
             </div>
-            <div class="about-info-buttons-wrapper col-lg-5">
+            <div class="about-info-buttons-wrapper col-12 col-lg-5 mt-4 mt-lg-0">
                 <a href="/newSignal" class="about-info-button-item animated">
                     <div class="about-info-button-icon">
                         <!-- Icon: Bell Ringing -->
