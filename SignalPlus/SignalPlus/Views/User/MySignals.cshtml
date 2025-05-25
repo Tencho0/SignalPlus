@@ -33,7 +33,7 @@
                                 <p>
                                     <span class="badge">#@signal.Id</span>
                                     <span class="status-@(signal.Status == SignalPlus.Models.Enums.Status.Регистриран ? "registered" : "completed")">
-                                        @signal.Status
+                                        @((signal.Status.ToString() == SignalPlus.Models.Enums.Status.ВОбработка.ToString()) ? "В Обработка" : signal.Status)
                                     </span>
                                 </p>
                                 <p><i class="fa-solid fa-location-dot"></i> @signal.LocationAddress</p>

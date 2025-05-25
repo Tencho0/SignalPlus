@@ -25,6 +25,15 @@
                     <div class="stat-value">@Model.TotalSignals</div>
                 </div>
             </a>
+            <a href="/allsignals?searchQuery=&status=ВОбработка" class="stat-box">
+                <div class="stat-icon">
+                    <img src="~/Images/COLOURBOX40672772.webp" alt="Bell icon" />
+                </div>
+                <div class="stat-info">
+                    <div class="stat-label">От тях<br />в обработка</div>
+                    <div class="stat-value">@Model.InProgressSignals</div>
+                </div>
+            </a>
 
             <a href="/allsignals?searchQuery=&status=Приключен" class="stat-box">
                 <div class="stat-icon">

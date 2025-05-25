@@ -15,9 +15,11 @@
         public async Task<IActionResult> Index()
         {
             var totalSignals = await _signalService.GetTotalSignalsCountAsync();
+            var inProgressSignals = await _signalService.GetInProgressSignalsCountAsync();
             var completedSignals = await _signalService.GetCompletedSignalsCountAsync();
 
             ViewData["TotalSignals"] = totalSignals;
+            ViewData["InProgressSignals"] = inProgressSignals;
             ViewData["CompletedSignals"] = completedSignals;
 
             return View();

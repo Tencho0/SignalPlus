@@ -21,6 +21,7 @@ namespace SignalPlus.Controllers
         public async Task<IActionResult> IndexAsync()
         {
             var total = await _signalService.GetTotalSignalsCountAsync();
+            var inProgress = await _signalService.GetInProgressSignalsCountAsync();
             var completed = await _signalService.GetCompletedSignalsCountAsync();
 
             var faq = FaqConstants.All
@@ -30,6 +31,7 @@ namespace SignalPlus.Controllers
             var homePageDTO = new HomePageDTO
             {
                 TotalSignals = total,
+                InProgressSignals = inProgress,
                 CompletedSignals = completed,
                 faq = faq,
             };

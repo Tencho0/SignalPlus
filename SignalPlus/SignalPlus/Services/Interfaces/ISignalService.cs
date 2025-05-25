@@ -20,6 +20,8 @@
         
         Task<int> GetTotalSignalsCountAsync();
         
+        Task<int> GetInProgressSignalsCountAsync();
+
         Task<int> GetCompletedSignalsCountAsync();
 
         Task<Signal> CreateSignalAsync(User? user, NewSignalDTO model, List<IFormFile> images);

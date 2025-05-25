@@ -28,7 +28,7 @@
                     @foreach (var status in Enum.GetValues(typeof(SignalPlus.Models.Enums.Status)))
                     {
                         <option value="@status" selected="@(Context.Request.Query["status"] == status.ToString())">
-                            @status
+                            @((status.ToString() == SignalPlus.Models.Enums.Status.ВОбработка.ToString()) ? "В Обработка" : status)
                         </option>
                     }
                 </select>
@@ -62,7 +62,7 @@
                                 <p>
                                     <span class="badge">#@signal.Id</span>
                                     <span class="status-@(signal.Status == SignalPlus.Models.Enums.Status.Регистриран ? "registered" : "completed")">
-                                        @signal.Status
+                                        @((signal.Status.ToString() == SignalPlus.Models.Enums.Status.ВОбработка.ToString()) ? "В Обработка" : signal.Status)
                                     </span>
                                 </p>
                                 <p><i class="fa-solid fa-location-dot"></i> @signal.LocationAddress</p>

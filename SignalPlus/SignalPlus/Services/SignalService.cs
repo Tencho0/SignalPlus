@@ -52,6 +52,12 @@
             return await _context.Signals.CountAsync();
         }
 
+        // Get signals in progress count
+        public async Task<int> GetInProgressSignalsCountAsync()
+        {
+            return await _context.Signals.CountAsync(s => s.Status == Status.ВОбработка);
+        }
+        
         // Get completed signals count
         public async Task<int> GetCompletedSignalsCountAsync()
         {
