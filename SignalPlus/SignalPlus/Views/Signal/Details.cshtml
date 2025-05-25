@@ -12,7 +12,7 @@
 
 <div class="signal-details-container">
     <h2><i class="fa-solid fa-circle-info"></i> @Model.Title</h2>
-    @if (User.IsInRole(Constants.AdministratorRoleName))
+@*     @if (User.IsInRole(Constants.AdministratorRoleName))
     {
         if (Model.IsApproved == null || Model.IsApproved == false)
         {
@@ -29,7 +29,7 @@
                 <button type="submit" class="btn btn-danger"><i class="fa-solid fa-xmark"></i> Отхвърли</button>
             </form>
         }
-    }
+    } *@
 
     @if (Model.IsNameVisible || User.IsInRole(Constants.AdministratorRoleName))
     {
@@ -40,19 +40,30 @@
         <p><strong>Подател:</strong> <i>Скрито</i></p>
     }
 
-    @if (User.IsInRole(Constants.AdministratorRoleName))
+@*     @if (User.IsInRole(Constants.AdministratorRoleName))
     {
         <p><strong>Телефон на подател:</strong> @Model.SenderPhone</p>
         <p><strong>Имейл на подател:</strong> @Model.SenderEmail</p>
-    }
+    } *@
 
-    <div class="meta">
-        <span class="badge">#@Model.Id</span>
-        <span class="status">@Model.Status</span>
-        <span class="category">@Model.Category</span>
-        <span class="date">@Model.CreatedAt.ToString("dd MMMM yyyy г., HH:mm ч.")</span>
+
+    <div class="signal-meta">
+        <div class="category-box">
+            <i class="fa-solid fa-lightbulb"></i>
+            <div>
+                <div class="category-label">Категория</div>
+                <div class="category-value">@Model.Category</div>
+            </div>
+        </div>
+
+        <span class="badge-id">СИГНАЛ #@Model.Id</span>
+
+        <span class="badge-status @Model.Status.ToString()">
+            @((Model.Status == SignalPlus.Models.Enums.Status.ВОбработка) ? "В ОБРАБОТКА" : Model.Status.ToString().ToUpper())
+        </span>
     </div>
 
+    <p><strong>Описание:</strong><br /> @Model.Description</p>
     @if (Model.Images != null && Model.Images.Any())
     {
         <div class="signal-images">
@@ -66,12 +77,17 @@
         </div>
     }
 
+    <h3>Местоположение</h3>
+    <div style="width: 100%; height: 400px;">
+        <iframe width="100%"
+                height="100%"
+                frameborder="0"
+                style="border:0"
+                src="https://www.google.com/maps?q=@Model.Latitude,@Model.Longitude&hl=bg&z=16&output=embed"
+                allowfullscreen>
+        </iframe>
+    </div>
     <p><i class="fa-solid fa-location-dot"></i> <strong>Адрес:</strong> @Model.LocationAddress</p>
-
-    <p><strong>Описание:</strong><br /> @Model.Description</p>
-    @*
-    <p><strong>Подаден от:</strong> @Model.User.Name</p> *@
-
     <p><strong>Координати:</strong> @Model.Latitude, @Model.Longitude</p>
 </div>
 
@@ -92,4 +108,61 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin: 0.5rem;
     }
+
+    .signal-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    align-items: center;
+}
+
+.category-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 120px;
+}
+
+.category-label {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.category-value {
+    font-weight: bold;
+}
+
+.badge-id {
+    background-color: #b28f2f;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+}
+
+.badge-status {
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: bold;
+    white-space: nowrap;
+    color: black;
+    background-color: #f7b340;
+}
+
+/* Responsive fix */
+@@media (max-width: 600px) {
+    .signal-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .badge-id,
+    .badge-status {
+        width: 100%;
+        text-align: center;
+    }
+}
+
 </style>
