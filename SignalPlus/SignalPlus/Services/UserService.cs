@@ -50,7 +50,6 @@
                 UserName = register.Email,
                 Name = register.Name,
                 Email = register.Email,
-                NormalizedEmail = register.Email.ToUpper(),
                 PhoneNumber = register.PhoneNumber,
             };
 
@@ -63,6 +62,24 @@
             {
                 return false;
             }
+        }
+
+        public async Task<bool> RequestPasswordResetAsync(string email, Func<string, string, string> generateResetUrl, Func<string, string, Task> sendEmailCallback)
+        {
+            var trimmedEmail = email.Trim().ToLower();
+            var user = await _userManager.FindByEmailAsync(trimmedEmail);
+
+            //TODO:
+            // if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+            if (user == null)
+                return false;
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var resetUrl = generateResetUrl(token, trimmedEmail);
+
+            await sendEmailCallback(user.Email, resetUrl);
+
+            return true;
         }
 
         public async Task LogoutAsync()

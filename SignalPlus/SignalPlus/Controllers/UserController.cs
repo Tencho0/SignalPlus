@@ -14,6 +14,7 @@
     using SignalPlus.Services;
     using Microsoft.AspNetCore.Authorization;
     using static System.Runtime.InteropServices.JavaScript.JSType;
+    using Microsoft.AspNetCore.Identity.UI.Services;
 
     public class UserController : Controller
     {
@@ -80,6 +81,34 @@
             }
 
             return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordDTO model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            await _userService.RequestPasswordResetAsync(
+                model.Email,
+                (token, email) =>
+                    Url.Action("ResetPassword", "Account", new { token, email }, protocol: Request.Scheme),
+                async (toEmail, url) =>
+                {
+                    var subject = "Възстановяване на парола";
+                    var body = $"Моля, кликнете <a href='{url}'>тук</a>, за да възстановите вашата парола.";
+                    //TODO: Implement _emailSender
+                    //await _emailSender.SendEmailAsync(toEmail, subject, body);
+                });
+
+            ViewBag.ResetRequested = true; // This will trigger the message
+            return View();
         }
 
         public async Task<IActionResult> Logout()

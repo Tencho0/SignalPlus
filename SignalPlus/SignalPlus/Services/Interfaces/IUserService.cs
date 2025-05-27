@@ -12,6 +12,8 @@
 
         Task<bool> RegisterUserAsync(RegisterDTO register);
 
+        Task<bool> RequestPasswordResetAsync(string email, Func<string, string, string> generateResetUrl, Func<string, string, Task> sendEmailCallback);
+
         Task LogoutAsync();
 
         Task<MyProfileDto?> GetCurrentUserProfileAsync();
