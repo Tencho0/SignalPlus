@@ -1176,3 +1176,9 @@ input[disabled] {
 .admin-btn:hover {
     opacity: 0.85;
 }
+
+@media (max-width: 788px) {
+    .container {
+        width: 100% !important;
+    }
+}
